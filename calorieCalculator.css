@@ -1,0 +1,89 @@
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            h1 {
+                color: #343a40;
+                text-align: center;
+                margin-bottom: 20px;
+                font-size: 24px;
+                font-weight: 700;
+            }
+
+            form {
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                width: 280px;
+                box-sizing: border-box;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 6px;
+                color: #495057;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 12px;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                font-size: 14px;
+                color: #495057;
+            }
+
+            input[type="radio"] {
+                margin-right: 6px;
+            }
+
+            .radio-group {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 15px;
+            }
+
+            .radio-group label {
+                display: inline-flex;
+                align-items: center;
+                margin-bottom: 8px;
+            }
+
+            input[type="button"] {
+                width: 100%;
+                padding: 10px;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 600;
+                transition: background-color 0.3s ease;
+            }
+
+            input[type="button"]:hover {
+                background-color: #0056b3;
+            }
+
+            p#result {
+                margin-top: 15px;
+                text-align: center;
+                font-size: 16px;
+                font-weight: 600;
+                color: #343a40;
+            }
+        

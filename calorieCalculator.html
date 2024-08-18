@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Calorie Calculator</title>
+      
+    </head>
+
+    <body>
+        <h1>Calculate Your Calories</h1>
+
+        <form action="">
+            <label for="age">Age</label>
+            <input type="text" id="age">
+            <br><br>
+            <label for="gender">Gender</label>
+            <br>
+            <input type="radio" id="genderMale" name="gender" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="genderFemale" name="gender" value="female">
+            <label for="female">Female</label>
+            <br><br>
+            <label for="height">Height(cm)</label>
+            <input type="text" id="height">
+            <br>
+            <label for="weight">Weight(kg)</label>
+            <input type="text" id="weight">
+            <br><br>
+            <label for="activity">Activity:</label><br>
+            <input type="radio" id="lightly" name="activity" value="lightlyActive">
+            <label for="lightly">Lightly</label><br>
+            <input type="radio" id="moderate" name="activity" value="moderatelyActive">
+            <label for="moderate">Moderate</label><br>
+            <input type="radio" id="highly" name="activity" value="veryActive">
+            <label for="highly">Highly</label><br>
+            <input type="button" id="calculate" value="Calculate" onclick="calculateCalories()">
+        </form>
+        <br>
+        <p id="result"></p>
+        
+    </body>
+    <script>
+        function calculateCalories() {
+            let gender = document.querySelector('input[name="gender"]:checked').value;
+            let age = parseInt(document.getElementById("age").value);
+            let weight = parseFloat(document.getElementById("weight").value);
+            let height = parseFloat(document.getElementById("height").value);
+            let activity = document.querySelector('input[name="activity"]:checked').value;
+            let bmr;
+
+            // Calculate BMR based on gender
+            if (gender === 'male') {
+                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+            } else if (gender === 'female') {
+                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+            }
+
+            // Calculate calorie requirement based on activity level
+            let calories;
+            if (activity === 'lightlyActive') {
+                calories = bmr * 1.375;
+            } else if (activity === 'moderatelyActive') {
+                calories = bmr * 1.55;
+            } else if (activity === 'veryActive') {
+                calories = bmr * 1.725;
+            }
+
+            // Display the result
+            document.getElementById("result").innerText = "Your daily calorie requirement is: " + Math.round(calories) + " calories";
+        }
+    </script>
+</html>
