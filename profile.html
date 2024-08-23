@@ -7,7 +7,7 @@
     <h1>My Profile</h1>
     <p>Manage and protect your account</p>
     <hr>
-    <img src="Default pfp.png" alt="Profile Picture" width="150px"><br><br>
+    <img id="editable-image" src="Default pfp.png" alt="Editable Image" width="150px"><br><br>
 
     <input type="file" id="upload-image" accept="image/*"><br><br>
 
@@ -20,6 +20,24 @@
     <input type="radio" name="Female">Female
     <br><br><input type="submit" value="Save">
     
+    <script>
+        // JavaScript to handle image change
+        const imgElement = document.getElementById('editable-image');
+        const fileInput = document.getElementById('upload-image');
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) { // Ensure it's an image file
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imgElement.src = e.target.result; // Update the image source
+                }
+                reader.readAsDataURL(file); // Read the uploaded file
+            } else {
+                alert("Please upload a valid image file.");
+            }
+        });
+    </script>
     
 
 </body>
