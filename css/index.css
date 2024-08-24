@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #ffffff; /* White background */
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    border-right: 1px solid #ddd; /* Optional: Add a border for better visibility */
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #333;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #000;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #000;
+    border: 2px solid #000; /* Border for better visibility */
+    padding: 10px 15px;
+    border-radius: 50%;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+
+.openbtn:hover {
+    background-color: #f1f1f1;
+}
+
+.hero-section {
+    background: #f8f9fa;
+    padding: 50px 0;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    color: #343a40;
+}
+
+.content-section {
+    padding: 30px 0;
+}
+
+.footer {
+    background: #343a40;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.btn-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.btn-container .btn {
+    margin-left: 10px;
+}
