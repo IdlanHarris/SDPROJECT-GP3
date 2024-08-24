@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Sign Up</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="Login.css" rel="stylesheet">
+    <link href="../css/SignUp.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Wrapper for centering and styling the login form -->
+    <!-- Wrapper for centering and styling the form -->
     <div class="form-wrapper">
-        <h1 class="text-center">Login</h1>
+        <h1 class="text-center">Sign Up</h1>
         <form>
+            <!-- Username input field -->
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username">
+            </div>
             <!-- Email input field -->
             <div class="form-group">
                 <label for="email">Email:</label>
@@ -24,10 +29,13 @@
                 <label for="password">Password:</label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
+            <!-- Phone number input field -->
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber">
+            </div>
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary">Login</button>
-            <!-- Optional link to sign-up page -->
-            <p class="text-muted mt-3">Don't have an account? <a href="signup.html">Sign up here</a></p>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
         </form>
     </div>
     <!-- jQuery: Required for Bootstrap's JavaScript components -->
