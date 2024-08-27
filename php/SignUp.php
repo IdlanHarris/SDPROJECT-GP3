@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost'; // Database host
 $db = 'gymdatabase'; // Database name
-$user = 'admin'; // Database username
-$pass = 'admin'; // Database password
+$user = 'gymAdmin'; // Database username
+$pass = 'gymAdmin'; // Database password
 
 // Create connection
 $conn = mysqli_connect($host, $user, $pass, $db);
