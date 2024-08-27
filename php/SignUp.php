@@ -46,6 +46,8 @@ $sql = "INSERT INTO users (user_id, username, email, password, phone_number, use
 
 if (mysqli_query($conn, $sql)) {
     echo "New record created successfully with user_id: $user_id";
+    header("Location: ../html/Login.html");
+    exit();
 } else {
     echo "Error: " . mysqli_error($conn);
 }
