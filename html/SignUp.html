@@ -13,30 +13,30 @@
     <!-- Wrapper for centering and styling the form -->
     <div class="form-wrapper">
         <h1 class="text-center">Sign Up</h1>
-        <form>
+        <form action="../php/SignUp.php" method="POST">
             <!-- Username input field -->
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" class="form-control" id="username" name="username">
+                <input type="text" class="form-control" id="username" name="username" required>
             </div>
             <!-- Email input field -->
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email">
+                <input type="email" class="form-control" id="email" name="email" required>
             </div>
             <!-- Password input field -->
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <!-- Phone number input field -->
             <div class="form-group">
                 <label for="phoneNumber">Phone Number:</label>
-                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber">
+                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required>
             </div>
             <!-- Submit button -->
             <button type="submit" class="btn btn-primary">Sign Up</button>
-            <!-- Optional link to sign-up page -->
+            <!-- Optional link to login page -->
             <p class="text-muted mt-3">Have an account? <a href="../html/Login.html">Login here</a></p>
         </form>
     </div>
