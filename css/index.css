@@ -92,3 +92,7 @@ body {
 .btn-container .btn {
     margin-left: 10px;
 }
+
+.hide-btn {
+    display: none;
+}

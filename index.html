@@ -92,10 +92,12 @@
     <script>
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
+            document.querySelector(".openbtn").classList.add("hide-btn");
         }
-
+    
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
+            document.querySelector(".openbtn").classList.remove("hide-btn");
         }
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
