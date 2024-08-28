@@ -1,6 +1,9 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
+
+
+
 
 .sidenav {
     height: 100%;
@@ -13,8 +16,8 @@ body {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
-    border-right: 1px solid #ddd; /* Optional: Add a border for better visibility */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for a better look */
+    border-right: 1px solid #ddd; /* Border for better visibility */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Shadow for better look */
 }
 
 .sidenav a {
@@ -62,22 +65,43 @@ body {
 }
 
 .hero-section {
-    background: #f8f9fa;
+    background: #f8f9fa; /* Soft Gray */
     padding: 50px 0;
 }
 
 .hero-section h1 {
     font-size: 3rem;
-    color: #343a40;
+    color: #343a40; /* Charcoal Gray */
 }
 
 .content-section {
     padding: 30px 0;
 }
 
+/* Section specific styles */
+.content-section:nth-of-type(1) {
+    background-color: #5bc0de; /* Light Blue */
+    color: #ffffff; /* White */
+}
+
+.content-section:nth-of-type(2) {
+    background-color: #d4edda; /* Light Green */
+    color: #333333; /* Dark Gray */
+}
+
+.content-section:nth-of-type(3) {
+    background-color: #fff3cd; /* Light Yellow */
+    color: #856404; /* Dark Yellow */
+}
+
+.content-section:nth-of-type(4) {
+    background-color: #f8d7da; /* Light Pink */
+    color: #721c24; /* Dark Pink */
+}
+
 .footer {
-    background: #343a40;
-    color: #ffffff;
+    background: #343a40; /* Dark Gray */
+    color: #ffffff; /* White */
     padding: 20px 0;
     text-align: center;
 }
@@ -96,3 +120,41 @@ body {
 .hide-btn {
     display: none;
 }
+
+.about-section {
+    background-color: #ff7f50; /* Coral */
+    padding: 50px 0;
+    text-align: center;
+}
+
+.about-section h2 {
+    font-size: 2.5rem;
+    color: #ffffff; /* White */
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.about-section p {
+    font-size: 1.1rem;
+    color: #ffffff; /* White */
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 20px;
+}
+
+.about-section p:first-of-type {
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #ffffff; /* White */
+}
+
+.about-section p:last-of-type {
+    margin-bottom: 0; /* Remove bottom margin from the last paragraph */
+}
+
+.content-section img {
+    max-width: 100%; /* Ensures the image does not exceed the width of its container */
+    height: auto; /* Maintains the aspect ratio */
+    margin-top: 20px; /* Adds space above the image */
+}
+

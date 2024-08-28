@@ -6,6 +6,9 @@
     <title>Bronco Gym Fitness</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../SDPROJECT-GP3/css/index.css"> <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="C:\Users\A S U S\OneDrive\Desktop\SEM 5\SD\SDPROJECT-GP3\css\membershipPlan.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
@@ -14,7 +17,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="#">Home</a>
         <a href="#">Gym Schedule</a>
-        <a href="../SDPROJECT-GP3/html/membershipPlan.html">Membership Plan</a>
+        <a href="#membership-plan">Membership Plan</a>
         <a href="#">Location</a>
         <a href="#">About Us</a>
         <a href="#">Contact Us</a>
@@ -45,17 +48,73 @@
             <div class="container">
                 <h2>Gym Schedule</h2>
                 <p>Check out our daily and weekly gym schedule to plan your workouts.</p>
+                <img src="C:\Users\A S U S\OneDrive\Desktop\SEM 5\SD\SDPROJECT-GP3\assets\GYM SCHEDULE.png" alt="Gym Schedule" class="img-fluid">
             </div>
         </section>
 
         <!-- Membership Plan Section -->
-        <section class="content-section text-center bg-light">
-        <div class="container">
-            <h2>Membership Plans</h2>
-            <p>Explore our flexible membership plans and choose the one that fits you best.</p>
-            <a href="../SDPROJECT-GP3/html/membershipPlan.html" class="btn btn-primary btn-lg">View Membership Plans</a>
-        </div>
+        <section id="membership-plan" class="plans__container">
+            <div class="plans">
+                <div class="plansHero">
+                    <h1 class="plansHero__title">Bronco Gym Fitness - Membership Plans</h1>
+                    <p class="plansHero__subtitle">Become Our Gym Member Today!</p>
+                </div>
+                <div class="planItem__container">
+                    <!-- Basic plan -->
+                    <div class="planItem planItem--free">
+                        <div class="card">
+                            <div class="card__header">
+                                <div class="card__icon symbol symbol--rounded"></div>
+                                <h2>Basic</h2>
+                            </div>
+                        </div>
+                        <div class="price">RM80<span>/ 1 month</span></div>
+                        <ul class="featureList">
+                            <li>Access to gym anytime during operating hours</li>
+                            <li>Access to all website features</li>
+                            <li class="disabled">No discount on any purchase products</li>
+                            <li class="disabled">First priority to any personal trainer</li>
+                        </ul>
+                        <button class="button">Subscribe</button>
+                    </div>
+                    <!-- Gold plan -->
+                    <div class="planItem planItem--pro">
+                        <div class="card">
+                            <div class="card__header">
+                                <div class="card__icon symbol"></div>
+                                <h2>Gold</h2>
+                            </div>
+                        </div>
+                        <div class="price">RM230<span>/ 3 months</span></div>
+                        <ul class="featureList">
+                            <li>Access to gym anytime during operating hours</li>
+                            <li>Access to all website features</li>
+                            <li>10% discount on any purchase product</li>
+                            <li class="disabled">First priority to any personal trainer</li>
+                        </ul>
+                        <button class="button button--pink">Subscribe</button>
+                    </div>
+                    <!-- Premium plan -->
+                    <div class="planItem planItem--entp">
+                        <div class="card">
+                            <div class="card__header">
+                                <div class="card__icon"></div>
+                                <h2>Premium</h2>
+                            </div>
+                        </div>
+                        <div class="price">RM450<span>/ 6 months</span></div>
+                        <ul class="featureList">
+                            <li>Access to gym anytime during operating hours</li>
+                            <li>Access to all website features</li>
+                            <li>15% discount on any purchase product</li>
+                            <li>First priority to any personal trainer</li>
+                        </ul>
+                        <button class="button button--white">Subscribe</button>
+                    </div>
+                </div>
+            </div>
         </section>
+    
 
         <!-- Location Section -->
         <section class="content-section text-center">
@@ -75,10 +134,11 @@
         </section>
 
         <!-- About Us Section -->
-        <section class="content-section text-center">
+        <section class="about-section">
             <div class="container">
                 <h2>About Us</h2>
-                <p>Learn more about our gym, our mission, and what sets us apart.</p>
+                <p>Welcome to Bronco Gym Fitness!</p>
+                <p>At Bronco Gym Fitness, our mission is to empower individuals to achieve their health and fitness goals in a supportive and motivating environment. We began with a vision to create a space where everyone from beginners to seasoned athletes can thrive. Whether you're here to lift weights, join a high-energy class, or simply maintain a healthy lifestyle, we have something for everyone.</p>
             </div>
         </section>
 
