@@ -5,5 +5,7 @@
             "Idlanharris\\SdprojectGp3\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
 }
