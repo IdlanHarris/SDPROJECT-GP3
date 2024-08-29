@@ -1,0 +1,11 @@
+{
+    "name": "idlanharris/sdproject-gp3",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
