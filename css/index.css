@@ -158,3 +158,32 @@ body {
     margin-top: 20px; /* Adds space above the image */
 }
 
+.contact-info {
+    background-color: #f8f9fa; /* Light background color */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Space inside the box */
+    margin: 20px auto; /* Centered with margin */
+    max-width: 600px; /* Maximum width */
+}
+
+.contact-info p {
+    margin: 10px 0; /* Space between paragraphs */
+    font-size: 16px; /* Font size */
+    color: #333; /* Text color */
+}
+
+.contact-info strong {
+    color: #007bff; /* Accent color for labels */
+    font-weight: bold; /* Bold labels */
+}
+
+@media (max-width: 768px) {
+    .contact-info {
+        padding: 15px; /* Reduced padding for smaller screens */
+    }
+
+    .contact-info p {
+        font-size: 14px; /* Smaller font size for smaller screens */
+    }
+}
