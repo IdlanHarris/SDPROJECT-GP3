@@ -1,57 +1,55 @@
 <?php
-$host = 'localhost'; // Database host
-$db = 'gymdatabase'; // Database name
-$user = 'gymAdmin'; // Database username
-$pass = 'gymAdmin'; // Database password
 
-// Create connection
-$conn = mysqli_connect($host, $user, $pass, $db);
+// due to the nature of this sphaggeti codebase
+// these 2 line below are needed whenever you want to import database class
+require __DIR__ . "/../vendor/autoload.php";
+use App\Database;
 
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+// Add create new instance of db class
+$database = new Database();
+$connection = $database->connect();
 
-// Step 1: Retrieve the latest user_id from the database
-$sql = "SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1";
-$result = mysqli_query($conn, $sql);
+//letak dalam try catch in case app crash
+try {
+    // ni aku copy paste je balik
+    // Step 1: Retrieve the latest user_id from the database
+    $stmt = $connection->query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1");
+    $latestUserId = $stmt->fetchColumn();
 
-if ($result && mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
-    $latest_user_id = $row['user_id'];
+     ///////////////////////////////////
+    // LET THE DB HANDLE THIS SHIT  //
+    /////////////////////////////////
 
-    // Step 2: Extract numeric part and increment
-    $numeric_part = intval(substr($latest_user_id, 2)); // Assumes format is 'M_XX'
-    $new_numeric_part = str_pad($numeric_part + 1, 2, '0', STR_PAD_LEFT);
+    // // Step 2: Extract numeric part and increment
+    // $numericPart = intval(substr($latestUserId, 2));
+    // $newNumericPart = str_pad($numericPart + 1, 2, '0', STR_PAD_LEFT);
 
-    // Step 3: Construct new user_id
-    $user_id = 'M_' . $new_numeric_part;
-} else {
-    // If no user exists, start with 'M_01'
-    $user_id = 'M_01';
-}
+    // // Step 3: Construct new user_id
+    // $userId = 'M_' . $newNumericPart;
 
-// Step 4: Retrieve and sanitize other input data
-$username = mysqli_real_escape_string($conn, trim($_POST['username']));
-$email = mysqli_real_escape_string($conn, trim($_POST['email']));
-$password = mysqli_real_escape_string($conn, trim($_POST['password']));
-$phone_number = mysqli_real_escape_string($conn, trim($_POST['phoneNumber']));
+    
 
-// Hash the password for security
-$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    // Step 4: Retrieve and sanitize other input data
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+    $phoneNumber = trim($_POST['phoneNumber']);
 
-// Step 5: Insert the new user with the generated user_id
-$sql = "INSERT INTO users (user_id, username, email, password, phone_number, userType) 
-        VALUES ('$user_id', '$username', '$email', '$passwordHash', '$phone_number', 'member')";
+    // Hash the password for security
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-if (mysqli_query($conn, $sql)) {
-    echo "New record created successfully with user_id: $user_id";
+    // Step 5: Insert the new user with the generated user_id
+    $stmt = $connection->prepare("INSERT INTO users (username, email, password, phone_number, user_type) VALUES (?, ?, ?, ?, ?)");
+    $stmt->execute([$username, $email, $passwordHash, $phoneNumber, 'member']);
+
+    // DATBASE WILL HANDLE USER ID
+    $userId = $connection->lastInsertId();
+    echo "New record created successfully with user_id: $userId";
     header("Location: ../html/Login.html");
     exit();
-} else {
-    echo "Error: " . mysqli_error($conn);
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+} finally {
+    $database->disconnect();
 }
-
-// Close the connection
-mysqli_close($conn);
 ?>

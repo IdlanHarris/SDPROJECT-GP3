@@ -2,7 +2,7 @@
     "name": "idlanharris/sdproject-gp3",
     "autoload": {
         "psr-4": {
-            "Idlanharris\\SdprojectGp3\\": "src/"
+            "App\\": "src/"
         }
     },
     "require": {
