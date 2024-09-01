@@ -22,6 +22,7 @@ class Database {
             $port = $_ENV['DB_PORT'];
             $databaseConnectionUri = "pgsql:host=$host;dbname=$dbname;port=$port";
             $this->pdo = new PDO($databaseConnectionUri, $username, $password);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Add this line for better error handling
         }
         return $this->pdo;
     }
