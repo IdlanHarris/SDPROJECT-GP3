@@ -3,8 +3,6 @@ body {
 }
 
 
-
-
 .sidenav {
     height: 100%;
     width: 0;
@@ -186,4 +184,12 @@ body {
     .contact-info p {
         font-size: 14px; /* Smaller font size for smaller screens */
     }
+}
+
+.main-header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: top 0.3s;
 }
