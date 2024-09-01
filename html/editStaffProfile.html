@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Staff Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .profile-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-image {
+            display: block;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .btn-custom {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Edit Staff Profile</h1>
+            <hr>
+        </div>
+        
+        <div class="text-center">
+            <img id="editable-image" src="../assets/Default pfp.png" alt="Editable Image" width="150px" class="profile-image"><br>
+            <input type="file" id="upload-image" accept="image/*" class="form-control mb-4">
+        </div>
+
+        <form id="staffProfileForm">
+            <div class="mb-3">
+                <label for="staffID" class="form-label">Staff ID:</label>
+                <input type="text" id="staffID" name="staffID" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="staffName" class="form-label">Name:</label>
+                <input type="text" id="staffName" name="staffName" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="staffEmail" class="form-label">Email:</label>
+                <input type="email" id="staffEmail" name="staffEmail" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="staffPhoneNumber" class="form-label">Phone Number:</label>
+                <input type="number" id="staffPhoneNumber" name="staffPhoneNumber" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="staffPosition" class="form-label">Position:</label>
+                <input type="text" id="staffPosition" name="staffPosition" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="staffDepartment" class="form-label">Department:</label>
+                <input type="text" id="staffDepartment" name="staffDepartment" class="form-control">
+            </div>
+            <button type="button" class="btn btn-primary btn-custom" onclick="saveStaffProfile()">Save</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // JavaScript to handle image change
+        const imgElement = document.getElementById('editable-image');
+        const fileInput = document.getElementById('upload-image');
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imgElement.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            } else {
+                alert("Please upload a valid image file.");
+            }
+        });
+
+        // Function to save staff profile data and redirect to the view page
+        function saveStaffProfile() {
+            const staffProfileData = {
+                image: imgElement.src,
+                staffID: document.getElementById('staffID').value,
+                staffName: document.getElementById('staffName').value,
+                staffEmail: document.getElementById('staffEmail').value,
+                staffPhoneNumber: document.getElementById('staffPhoneNumber').value,
+                staffPosition: document.getElementById('staffPosition').value,
+                staffDepartment: document.getElementById('staffDepartment').value,
+            };
+
+            // Store data in local storage
+            localStorage.setItem('staffProfileData', JSON.stringify(staffProfileData));
+
+            // Redirect to staff profile view page
+            window.location.href = 'view-staff-profile.html';
+        }
+    </script>
+</body>
+</html>
