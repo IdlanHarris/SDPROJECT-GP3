@@ -23,6 +23,12 @@
             text-align: center;
             margin-bottom: 20px;
         }
+        .profile-image {
+            display: block;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
         .btn-custom {
             width: 100%;
         }
@@ -44,4 +50,57 @@
             <p id="view-adminName"></p>
         </div>
         <div class="mb-3">
-            <label class="form
+            <label class="form-label"><strong>Email:</strong></label>
+            <p id="view-adminEmail"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label"><strong>Phone Number:</strong></label>
+            <p id="view-adminPhoneNumber"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label"><strong>Role:</strong></label>
+            <p id="view-adminRole"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label"><strong>Department:</strong></label>
+            <p id="view-adminDepartment"></p>
+        </div>
+        <a href="editAdminProfile.html"><button class="btn btn-secondary btn-custom" onclick="editAdminProfile()">Edit Profile</button></a>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const index = urlParams.get('index');
+            if (index !== null) {
+                loadAdminProfile(index);
+            }
+        });
+
+        function loadAdminProfile(index) {
+            const adminProfiles = JSON.parse(localStorage.getItem('adminProfiles')) || [];
+            const profile = adminProfiles[index];
+
+            if (profile) {
+                document.getElementById('view-adminID').textContent = profile.adminID;
+                document.getElementById('view-adminName').textContent = profile.adminName;
+                document.getElementById('view-adminEmail').textContent = profile.adminEmail;
+                document.getElementById('view-adminPhoneNumber').textContent = profile.adminPhoneNumber;
+                document.getElementById('view-adminRole').textContent = profile.adminRole;
+                document.getElementById('view-adminDepartment').textContent = profile.adminDepartment;
+            }
+        }
+
+        function editAdminProfile() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const index = urlParams.get('index');
+            if (index !== null) {
+                window.location.href = `edit-admin-profile.html?index=${index}`;
+            }
+        }
+    </script>
+</body>
+</html>
