@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bronco Gym Fitness - Member Homepage</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/memberHomepage.css">
+    <link rel="stylesheet" href="./css/membershipPlan.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Side Navbar -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#home">Home</a>
+        <a href="./html/profile.html">My Profile</a>
+        <a href="#calorie-calculator-section">Calorie Calculator</a>
+        <a href="#gym-schedule-section">Gym Schedule</a>
+        <a href="#membership-status-section">Membership Status</a>
+        <a href="#location-section">Location</a>
+        <a href="#contact-us-section">Contact Us</a>
+    </div>
+
+    <!-- Main content -->
+    <div id="main">
+        <button class="openbtn" onclick="openNav()">&#9776;</button>
+
+        <!-- Calorie Calculator Section -->
+        <section id="calorie-calculator-section" class="calorie-calculator-section">
+            <div class="container">
+                <h2>Calorie Calculator</h2>
+                <form id="calorie-form">
+                    <label for="age">Age</label>
+                    <input type="text" id="age" class="form-control">
+                    <br>
+                    <label for="gender">Gender</label><br>
+                    <input type="radio" id="genderMale" name="gender" value="male">
+                    <label for="male">Male</label><br>
+                    <input type="radio" id="genderFemale" name="gender" value="female">
+                    <label for="female">Female</label><br><br>
+                    <label for="height">Height (cm)</label>
+                    <input type="text" id="height" class="form-control">
+                    <br>
+                    <label for="weight">Weight (kg)</label>
+                    <input type="text" id="weight" class="form-control">
+                    <br><br>
+                    <label for="activity">Activity Level:</label><br>
+                    <input type="radio" id="lightly" name="activity" value="lightlyActive">
+                    <label for="lightly">Lightly Active</label><br>
+                    <input type="radio" id="moderate" name="activity" value="moderatelyActive">
+                    <label for="moderate">Moderately Active</label><br>
+                    <input type="radio" id="highly" name="activity" value="veryActive">
+                    <label for="highly">Very Active</label><br><br>
+                    <input type="button" id="calculate" class="btn btn-primary" value="Calculate" onclick="calculateCalories()">
+                </form>
+                <br>
+                <p id="result"></p>
+            </div>
+
+            <!-- Scripts -->
+            <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+                document.querySelector(".openbtn").classList.add("hide-btn");
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                document.querySelector(".openbtn").classList.remove("hide-btn");
+            }
+
+            function calculateCalories() {
+                let gender = document.querySelector('input[name="gender"]:checked').value;
+                let age = parseInt(document.getElementById("age").value);
+                let weight = parseFloat(document.getElementById("weight").value);
+                let height = parseFloat(document.getElementById("height").value);
+                let activity = document.querySelector('input[name="activity"]:checked').value;
+                let bmr;
+
+                // Calculate BMR based on gender
+                if (gender === 'male') {
+                    bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+                } else if (gender === 'female') {
+                    bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+                }
+
+                // Calculate calorie requirement based on activity level
+                let calories;
+                if (activity === 'lightlyActive') {
+                    calories = bmr * 1.375;
+                } else if (activity === 'moderatelyActive') {
+                    calories = bmr * 1.55;
+                } else if (activity === 'veryActive') {
+                    calories = bmr * 1.725;
+                }
+
+                // Display the result
+                document.getElementById("result").innerText = "Your daily calorie requirement is: " + Math.round(calories) + " calories";
+            }
+            </script>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </section>
+
+        <!-- Gym Schedule Section -->
+        <section id="gym-schedule-section" class="content-section text-center">
+            <div class="container">
+                <h2>Gym Schedule</h2>
+                <p>Check out our daily and weekly gym schedule to plan your workouts.</p>
+                <img src="./assets/GYM SCHEDULE.png" alt="Gym Schedule" class="img-fluid">
+            </div>
+        </section>
+
+        <!-- Membership Status Section -->
+        <section id="membership-status-section" class="membership-status-section">
+            <div class="container">
+                <h2>Membership Status</h2>
+                <p>Check your current membership status and renewal date.</p>
+                <div id="membership-status">
+                    <!-- Placeholder for membership status information -->
+                    <p><strong>Membership Type:</strong> Basic</p>
+                    <p><strong>Expiry Date:</strong> December 31, 2024</p>
+                    <p><strong>Status:</strong> Active</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Workout Planner Section -->
+        <section id="workout-planner-section" class="workout-planner-section">
+            <div class="container">
+                <h2>Workout Planner</h2>
+                <form id="workout-planner-form">
+                    <label for="goal">Fitness Goal</label>
+                    <select id="goal" class="form-control">
+                        <option value="weightLoss">Weight Loss</option>
+                        <option value="muscleGain">Muscle Gain</option>
+                        <option value="endurance">Endurance</option>
+                    </select>
+                    <br>
+                    <label for="days">Days per Week</label>
+                    <input type="number" id="days" class="form-control" min="1" max="7">
+                    <br>
+                    <label for="intensity">Workout Intensity</label>
+                    <select id="intensity" class="form-control">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                    <br>
+                    <input type="button" id="generate-plan" class="btn btn-primary" value="Generate Plan" onclick="generateWorkoutPlan()">
+                </form>
+                <br>
+                <div id=""></div>
+            </div>
+
+            <!-- Scripts -->
+            <script>
+            function generateWorkoutPlan() {
+                let goal = document.getElementById("goal").value;
+                let days = parseInt(document.getElementById("days").value);
+                let intensity = document.getElementById("intensity").value;
+
+                // Generate a basic workout plan based on user input
+                let plan = `Based on your goal of ${goal}, working out ${days} days a week at ${intensity} intensity.`;
+
+                // Display the result
+                document.getElementById("workout-plan-result").innerText = plan;
+            }
+            </script>
+        </section>
+
+        <!-- Location Section -->
+        <section id="location-section" class="content-section text-center">
+            <div class="container">
+                <h2>Location</h2>
+                <p>Find us on the university campus and get directions to our gym.</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1893.2950202680884!2d101.72190662423789!3d3.173425170892717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc37e8de0a443f%3A0x679c1f1f4456821e!2sUniversiti%20Putra%20Malaysia!5e0!3m2!1sen!2smy!4v1696168491325!5m2!1sen!2smy" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact-us-section" class="content-section text-center">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <p>Get in touch with us for any inquiries or support.</p>
+                <p>Email: contact@broncogymfitness.com</p>
+                <p>Phone: +60 12-3456789</p>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>
