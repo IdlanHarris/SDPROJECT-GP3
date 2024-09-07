@@ -34,14 +34,14 @@ body {
 .btn-primary {
     width: 100%;
     padding: 10px;
-    background-color: #1dfb1d;
+    background-color: #0b3d91;
     color: #fff;
     border: none;
     border-radius: 4px;
 }
 
 .btn-primary:hover {
-    background-color: #17a417;
+    background-color: #0a58ca;
 }
 
 .text-muted {

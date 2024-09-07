@@ -23,29 +23,29 @@
         <!-- Add/Remove Staff Section -->
         <section id="add-remove-staff">
             <h2>Add Staff</h2>
-            <form id="add-staff-form" action="../php/addStaff.php" method="post">
+            <form id="add-staff-form" action="../php/AddRemoveStaff.php" method="POST">
+                <!-- Username input field -->
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
-
+                <!-- Email input field -->
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
-
+                <!-- Password input field -->
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
-
+                <!-- Phone number input field -->
                 <label for="phone_number">Phone Number:</label>
                 <input type="text" id="phone_number" name="phone_number" required>
-
-                <input type="hidden" name="user_type" value="staff">
-
+                <!-- Submit button -->
                 <button type="submit">Add Staff</button>
             </form>
 
             <h2>Remove Staff</h2>
-            <form id="remove-staff-form" action=C:\laragon\www\SDPROJECT-GP3\php\removeStaff.php method="post">
+            <form id="remove-staff-form" action="../php/AddRemoveStaff.php" method="post">
+                <!-- User_Id input Field -->
                 <label for="user_id">User ID:</label>
                 <input type="text" id="user_id" name="user_id" required>
-
+                <!-- Submit Button -->
                 <button type="submit">Remove Staff</button>
             </form>
         </section>
@@ -82,6 +82,7 @@
 
                     foreach ($products as $product):
                     ?>
+                    
                     <tr>
                         <td><?php echo htmlspecialchars($product['product_id']); ?></td>
                         <td><?php echo htmlspecialchars($product['product_name']); ?></td>
