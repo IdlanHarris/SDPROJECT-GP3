@@ -1,32 +1,34 @@
-/* styles.css */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Ensures the body takes up at least the full viewport height */
+    min-height: 100vh;
     margin: 0;
     background-color: #4e4e4e;
 }
 
 .form-wrapper {
-    border: 1px solid #ccc; /* Border around the entire form container */
+    border: 1px solid #ccc;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    width: 100%; /* Makes the container responsive */
-    max-width: 500px; /* Limits the maximum width of the form */
-    box-sizing: border-box; /* Ensures padding is included in width */
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px; /* Width of the login form box */
+    box-sizing: border-box;
+}
+
+h1 {
+    margin-bottom: 20px; /* Space between the title and form */
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 15px; /* Space between form elements */
 }
 
 .form-control {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -34,17 +36,17 @@ body {
 .btn-primary {
     width: 100%;
     padding: 10px;
-    background-color: #0b3d91;
+    background-color: #0d6efd;
     color: #fff;
     border: none;
     border-radius: 4px;
 }
 
 .btn-primary:hover {
-    background-color: #0a58ca;
+    background-color: #0a58ca; /* Slightly darker on hover */
 }
 
 .text-muted {
     color: #6c757d;
-    text-align: center;
+    text-align: center; /* Center text */
 }
