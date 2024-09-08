@@ -5,6 +5,10 @@ use App\Database;
 
 session_start(); // Start the session to manage user authentication
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Check if the login form has been submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Create a new instance of the Database class and establish a connection
@@ -31,8 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Login successful! Welcome, " . $_SESSION['username'];
 
             // Redirect to a protected page or dashboard
-            header("Location: ../html/dashboard.html");
-            exit();
+            header("Location: /html/memberHomePage.html");
+            exit(); // Ensure no further code execution after redirection
         } else {
             // Password is incorrect or user doesn't exist
             echo "Invalid email or password.";
