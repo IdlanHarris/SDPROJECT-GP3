@@ -40,6 +40,10 @@
             <label class="form-label"><strong>Gender:</strong></label>
             <p id="view-gender"></p>
         </div>
+        <div class="mb-3">
+            <label class="form-label"><strong>Status:</strong></label>
+            <p id="view-status"></p>
+        </div>
         <a href="editProfile.html"><button class="btn btn-secondary btn-custom" onclick="editProfile()">Edit Profile</button></a>
         <button class="btn btn-primary btn-custom mt-3" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</button>
     </div>
@@ -90,6 +94,7 @@
                 document.getElementById('view-email').textContent = profileData.email;
                 document.getElementById('view-phoneNumber').textContent = profileData.phoneNumber;
                 document.getElementById('view-gender').textContent = profileData.gender;
+                document.getElementById('view-status').textContent = profileData.status; // New line for status
             } else {
                 //alert("No profile found. Please create your profile first.");
                 //window.location.href = 'edit-profile.html';
