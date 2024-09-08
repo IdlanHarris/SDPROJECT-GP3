@@ -31,7 +31,7 @@ try {
     echo "New member added successfully with user_id: $newUserId";
 
     // Redirect to the login page after successful signup
-    //header("Location: html/login.html");
+    header("Location: /html/login.html");
     exit();
 } catch (PDOException $e) {
     // Display an error message if something goes wrong
