@@ -1,11 +1,25 @@
+<?php
+session_start(); // Start the session
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // If not logged in, redirect to the login page
+    header("Location: /");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Admin Dashboard</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/adminDashboard.css">
+  <link rel="stylesheet" href="adminDashboard.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -16,11 +30,12 @@
 <div class="sidebar" id="mySidebar">
   <h2>Admin</h2>
   <ul class="nav nav-pills nav-stacked">
-    <li><a href="adminProfile.html">Profile</a></li>
+    <li><a href="adminProfile.php">Profile</a></li>
     <li><a href="#section1">Statistics</a></li>
     <li><a href="#section2">Add/Remove Staff</a></li>
     <li><a href="#section3">Products Information</a></li>
     <li><a href="#section4">Customer Orders</a></li>
+    <li><a href="/php/LogOut.php">Logout</a></li>
   </ul>
 </div>
 
@@ -66,35 +81,36 @@
   <!-- Add Staff Modal -->
   <div id="addStaffModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Staff</h4>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Staff</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/php/AddRemoveStaff.php" method="POST">
+                    <div class="form-group">
+                        <label for="addStaffName">Username:</label>
+                        <input type="text" class="form-control" id="addStaffName" name="username" placeholder="Enter staff name">
+                    </div>
+                    <div class="form-group">
+                        <label for="addStaffEmail">Email:</label>
+                        <input type="email" class="form-control" id="addStaffEmail" name="email" placeholder="Enter staff email">
+                    </div>
+                    <div class="form-group">
+                        <label for="addStaffPhone">Phone Number:</label>
+                        <input type="text" class="form-control" id="addStaffPhone" name="phone_number" placeholder="Enter staff phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="addStaffPassword">Password:</label>
+                        <input type="password" class="form-control" id="addStaffPassword" name="password" placeholder="Enter staff password">
+                    </div>
+                    <button type="submit" class="btn btn-success">Add Staff</button>
+                </form>
+            </div>
         </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="addStaffName">Name:</label>
-              <input type="text" class="form-control" id="addStaffName" placeholder="Enter staff name">
-            </div>
-            <div class="form-group">
-              <label for="addStaffEmail">Email:</label>
-              <input type="email" class="form-control" id="addStaffEmail" placeholder="Enter staff email">
-            </div>
-            <div class="form-group">
-              <label for="addStaffPhone">Phone Number:</label>
-              <input type="text" class="form-control" id="addStaffPhone" placeholder="Enter staff phone number">
-            </div>
-            <div class="form-group">
-              <label for="addStaffPassword">Password:</label>
-              <input type="password" class="form-control" id="addStaffPassword" placeholder="Enter staff password">
-            </div>
-            <button type="submit" class="btn btn-success">Add Staff</button>
-          </form>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
   
   <!-- Remove Staff Modal -->
   <div id="removeStaffModal" class="modal fade" role="dialog">
@@ -105,10 +121,10 @@
           <h4 class="modal-title">Remove Staff</h4>
         </div>
         <div class="modal-body">
-          <form>
+          <form action="/php/AddRemoveStaff.php" method="POST">
             <div class="form-group">
               <label for="removeStaffID">Staff ID:</label>
-              <input type="text" class="form-control" id="removeStaffID" placeholder="Enter staff ID">
+              <input type="text" class="form-control" id="removeStaffID" name="user_id" placeholder="Enter staff ID">
             </div>
             <button type="submit" class="btn btn-danger">Remove Staff</button>
           </form>

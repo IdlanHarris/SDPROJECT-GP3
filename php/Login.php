@@ -17,18 +17,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Step 1: Retrieve and sanitize input data
-        $email = trim($_POST['email']);
+        $username = trim($_POST['username']);
         $password = trim($_POST['password']);
 
         // Step 2: Prepare the SQL statement to fetch user data along with their user type
-        $stmt = $connection->prepare("SELECT user_id, username, password, user_type FROM users WHERE email = ?");
-        $stmt->execute([$email]);
+        $stmt = $connection->prepare("SELECT user_id, password, user_type FROM users WHERE username = ?");
+        $stmt->execute([$username]);
 
         // Step 3: Fetch the user record from the database
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Step 4: Verify the password
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && $password == $user['password']) {
             // Password is correct, start a session and store user data
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
@@ -37,13 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Step 5: Redirect based on user type
             switch ($user['user_type']) {
                 case 'admin':
-                    header("Location: /html/admin/adminDashboard.html");
+                    header("Location: /html/admin/adminDashboard.php");
                     break;
                 case 'staff':
-                    header("Location: /html/staff/staffDashboard.html");
+                    header("Location: /html/staff/staffDashboard.php");
                     break;
                 case 'member':
-                    header("Location: /html/memberHomepage.html");
+                    header("Location: /html/memberHomePage.php");
                     break;
                 default:
                     echo "Invalid user type.";

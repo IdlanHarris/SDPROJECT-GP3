@@ -26,7 +26,7 @@ try {
 
     // Step 5: Insert the new user into the database with the custom user_id
     $stmt = $connection->prepare("INSERT INTO users (user_id, username, email, password, phone_number, user_type) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->execute([$newUserId, $username, $email, $passwordHash, $phoneNumber, 'member']);
+    $stmt->execute([$newUserId, $username, $email, $password, $phoneNumber, 'member']);
 
     echo "New member added successfully with user_id: $newUserId";
 
