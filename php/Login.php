@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
 
-        // Step 2: Prepare the SQL statement to fetch user data
-        $stmt = $connection->prepare("SELECT user_id, username, password FROM users WHERE email = ?");
+        // Step 2: Prepare the SQL statement to fetch user data along with their user type
+        $stmt = $connection->prepare("SELECT user_id, username, password, user_type FROM users WHERE email = ?");
         $stmt->execute([$email]);
 
         // Step 3: Fetch the user record from the database
@@ -32,10 +32,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Password is correct, start a session and store user data
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
-            echo "Login successful! Welcome, " . $_SESSION['username'];
+            $_SESSION['user_type'] = $user['user_type']; // Store user type in session
 
-            // Redirect to a protected page or dashboard
-            header("Location: /html/memberHomePage.html");
+            // Step 5: Redirect based on user type
+            switch ($user['user_type']) {
+                case 'admin':
+                    header("Location: /html/admin/adminDashboard.html");
+                    break;
+                case 'staff':
+                    header("Location: /html/staff/staffDashboard.html");
+                    break;
+                case 'member':
+                    header("Location: /html/memberHomepage.html");
+                    break;
+                default:
+                    echo "Invalid user type.";
+                    exit();
+            }
+
             exit(); // Ensure no further code execution after redirection
         } else {
             // Password is incorrect or user doesn't exist
@@ -51,3 +65,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo "Invalid request method.";
 }
+
