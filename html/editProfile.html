@@ -92,6 +92,29 @@
             // Redirect to profile view page
             window.location.href = 'view-profile.html';
         }
+
+        // Change password function
+        document.getElementById('change-password-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (newPassword !== confirmPassword) {
+                alert('New passwords do not match!');
+                return;
+            }
+
+            // You can add your logic here to update the password
+            // For example, validate the current password and then update the password
+            alert('Password changed successfully!');
+            // Clear the form after successful password change
+            this.reset();
+            // Hide the modal after successful password change
+            const modal = bootstrap.Modal.getInstance(document.getElementById('changePasswordModal'));
+            modal.hide();
+        });
     </script>
 </body>
 </html>
