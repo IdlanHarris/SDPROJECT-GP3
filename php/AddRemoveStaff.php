@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$newUserId, $username, $email, $password, $phoneNumber, 'staff']);
 
             // Redirect to the admin dashboard with a success parameter
-            header("Location: /html/admin/adminDashboard.html?success=true");
+            header("Location: /html/admin/adminDashboard.php");
             exit();
 
         } elseif (isset($_POST['user_id'])) {
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userId = trim($_POST['user_id']);
 
             if (empty($userId)) {
-                header("Location: /html/admin/adminDashboard.html");
+                header("Location: /html/admin/adminDashboard.php");
                 exit();
             }
         
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute([$userId]);
         
                 // Redirect to the admin dashboard with a success parameter
-                header("Location: /html/admin/adminDashboard.html");
+                header("Location: /html/admin/adminDashboard.php");
                 exit();
             }
         }

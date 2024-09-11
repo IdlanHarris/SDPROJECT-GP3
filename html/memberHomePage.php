@@ -27,7 +27,7 @@ if (!isset($_SESSION['user_id'])) {
     <body>
 <!-- Responsive navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="padding-left: 15px; padding-right: 15px;">
-        <div class="container-fluid" style="max-width: 1750px; margin-left: auto; margin-right: auto;">
+        <div class="container-fluid" style="max-width: 1600px; margin-left: auto; margin-right: auto;">
             <!-- Logo and Brand -->
             <a class="navbar-brand d-flex align-items-center" href="memberHomePage.php">
                 <img src="/assets/utmlogo.png" alt="Bronco Logo" style="height: 40px; margin-right: 10px;">

@@ -30,7 +30,7 @@ if (!isset($_SESSION['user_id'])) {
 <div class="sidebar" id="mySidebar">
   <h2>Admin</h2>
   <ul class="nav nav-pills nav-stacked">
-    <li><a href="adminProfile.php">Profile</a></li>
+    <li><a href="/html/admin/adminProfile.html">Profile</a></li>
     <li><a href="#section1">Statistics</a></li>
     <li><a href="#section2">Add/Remove Staff</a></li>
     <li><a href="#section3">Products Information</a></li>

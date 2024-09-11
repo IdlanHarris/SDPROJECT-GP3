@@ -21,17 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password = trim($_POST['password']);
 
         // Step 2: Prepare the SQL statement to fetch user data along with their user type
-        $stmt = $connection->prepare("SELECT user_id, password, user_type FROM users WHERE username = ?");
+        $stmt = $connection->prepare("SELECT user_id, username, password, user_type FROM users WHERE username = ?");
         $stmt->execute([$username]);
 
         // Step 3: Fetch the user record from the database
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Step 4: Verify the password
-        if ($user && $password == $user['password']) {
+        if ($user && $password === $user['password']) {
             // Password is correct, start a session and store user data
             $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['username'] = $user['username'];
+            $_SESSION['username'] = $user['username']; // Store the username in the session
             $_SESSION['user_type'] = $user['user_type']; // Store user type in session
 
             // Step 5: Redirect based on user type
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit(); // Ensure no further code execution after redirection
         } else {
             // Password is incorrect or user doesn't exist
-            echo "Invalid email or password.";
+            echo "Invalid username or password.";
         }
     } catch (PDOException $e) {
         // Display an error message if something goes wrong
@@ -65,4 +65,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo "Invalid request method.";
 }
-

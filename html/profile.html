@@ -45,36 +45,8 @@
             <p id="view-status"></p>
         </div>
         <a href="editProfile.html"><button class="btn btn-secondary btn-custom" onclick="editProfile()">Edit Profile</button></a>
-        <button class="btn btn-primary btn-custom mt-3" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password</button>
-    </div>
-
-    <!-- Change Password Modal -->
-    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="change-password-form">
-                        <div class="mb-3">
-                            <label for="current-password" class="form-label"><strong>Current Password:</strong></label>
-                            <input type="password" class="form-control" id="current-password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="new-password" class="form-label"><strong>New Password:</strong></label>
-                            <input type="password" class="form-control" id="new-password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="confirm-password" class="form-label"><strong>Confirm New Password:</strong></label>
-                            <input type="password" class="form-control" id="confirm-password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Change Password</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+        <a href="/html/changePass.html"><button class="btn btn-primary btn-custom mt-3">Change Password</button></a>
+        <a href="/html/memberHomePage.php"><button class="btn btn-primary btn-custom mt-3">Home</button></a>    
     </div>
 
     <!-- Bootstrap JS (Optional) -->
@@ -121,7 +93,7 @@
 
             // You can add your logic here to update the password
             // For example, validate the current password and then update the password
-            alert('Password changed successfully!');
+            //alert('Password changed successfully!');
             // Clear the form after successful password change
             this.reset();
             // Hide the modal after successful password change
