@@ -321,36 +321,7 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </div>
         </section>
-
-        <!-- About and Contact Us Section -->
-        <section id="about-contact" class="bg-light py-4">
-            <div class="container px-2 my-0 px-2">
-                <div class="text-center mb-5">
-                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-info-circle"></i></div>
-                    <h2 class="fw-bolder">About Us & Contact Us</h2>
-                </div>
-                <div class="row justify-content-center">
-                    <!-- About Us Column -->
-                    <div class="col-lg-9 mb-4 text-center">
-                        <h3 class="fw-bolder mb-3">About Us</h3>
-                        <p class="lead">Welcome to <strong>Bronco Gym Fitness</strong>, where strength, endurance, and transformation meet.</p>
-                        <p>At <strong>Bronco Gym Fitness</strong>, we are more than just a gym—we are a community committed to helping you push your limits and redefine your boundaries. Whether you're lifting, sprinting, or crushing a high-intensity workout, we're here to help you achieve peak performance.</p>
-                        <p>Our mission is to empower individuals to achieve their fitness goals in an environment designed to challenge and support. From beginners to elite athletes, we provide the tools, expertise, and motivation to transform your fitness journey.</p>
-                    </div>
-                    <div class="w-100"></div>
-                    <!-- Contact Us Column -->
-                    <div class="col-lg-6 text-center">
-                        <h3 class="fw-bolder mb-3">Contact Us</h3>
-                        <p class="lead mb-0">We'd love to hear from you</p>
-                        <p><strong>Phone:</strong> (123) 456-7890</p>
-                        <p><strong>Email:</strong> broncogymutmkl@gmail.com</p>
-                        <p><strong>Operating Hours:</strong> Mon-Fri, 10am - 7pm</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
+        
         <!-- Footer-->
         <footer class="py-3 bg-dark">
             <div class="container px-5"><p class="m-0 text-center text-white">&copy; 2024 Bronco Gym Fitness. All rights reserved.</p></div>
