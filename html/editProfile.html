@@ -22,14 +22,10 @@
         </div>
 
         <!-- Use POST and point the form to editprofile.php -->
-        <form id="profileForm" method="POST" action="EditProfile.php" enctype="multipart/form-data">
+        <form id="profileForm" method="POST" action="../php/EditProfile.php" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="username" class="form-label">Username:</label>
                 <input type="text" id="username" name="username" class="form-control">
-            </div>
-            <div class="mb-3">
-                <label for="name" class="form-label">Name:</label>
-                <input type="text" id="name" name="name" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
@@ -39,18 +35,6 @@
                 <label for="PhoneNumber" class="form-label">Phone Number:</label>
                 <input type="number" id="PhoneNumber" name="phone_number" class="form-control">
             </div>
-            <div class="mb-3">
-                <label class="form-label">Gender:</label><br>
-                <div class="form-check form-check-inline">
-                    <input type="radio" id="male" name="gender" class="form-check-input" value="Male">
-                    <label for="male" class="form-check-label">Male</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input type="radio" id="female" name="gender" class="form-check-input" value="Female">
-                    <label for="female" class="form-check-label">Female</label>
-                </div>
-            </div>
-            <!-- Removed <a> tags -->
             <button type="submit" class="btn btn-primary btn-custom">Save</button>
             <button type="button" class="btn btn-primary btn-custom">Change Password</button>
         </form>

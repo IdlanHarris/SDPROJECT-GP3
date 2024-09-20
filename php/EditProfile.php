@@ -1,4 +1,5 @@
 <?php
+
 require __DIR__ . '/../vendor/autoload.php'; // Autoload dependencies
 use App\Database;
 
@@ -8,35 +9,55 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     // Redirect to login if the user is not logged in
-<<<<<<< HEAD
-    header("Location: login.php");
-=======
     header("Location: Login.php");
->>>>>>> e4547b7d87eca1b1007d6ca31503f00d8efc8fab
     exit;
 }
 
-$user_id = $_SESSION['user_id'];
-$db = new Database(); // Assuming the Database class is already defined and working
-$conn = $db->getConnection();
+// Create a new instance of the Database class and establish a connection
+$database = new Database();
+$connection = $database->connect();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sanitize and validate input
-    $username = htmlspecialchars(trim($_POST['username']));
-    $password = htmlspecialchars(trim($_POST['password']));
-    $phone_number = htmlspecialchars(trim($_POST['phone_number']));
-    $email = htmlspecialchars(trim($_POST['email']));
-    
-    // Update query
-    $stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, phone_number = ?, email = ? WHERE user_id = ?");
-    $stmt->bind_param("sssss", $username, $password, $phone_number, $email, $user_id);
+    try {
+        // Step 1: Retrieve and sanitize input data
+        $username = trim($_POST['username']);
+        $phone_number = trim($_POST['phone_number']);
+        $email = trim($_POST['email']);
+        
+        // Step 2: Handle image upload
+        $imagePath = null;
+        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == UPLOAD_ERR_OK) {
+            $uploadDir = __DIR__ . '/../uploads/';
+            $imageName = basename($_FILES['profile_image']['name']);
+            $imagePath = $uploadDir . $imageName;
 
-    if ($stmt->execute()) {
-        // Profile updated successfully
-        echo "Profile updated successfully!";
-    } else {
-        echo "Error updating profile: " . $conn->error;
+            // Move uploaded file to the uploads directory
+            if (!move_uploaded_file($_FILES['profile_image']['tmp_name'], $imagePath)) {
+                die("Failed to upload image.");
+            }
+
+            // Store relative path to image
+            $imagePath = 'uploads/' . $imageName;
+        }
+
+        // Step 3: Prepare and execute the update query
+        $stmt = $connection->prepare("UPDATE users SET username = ?, phone_number = ?, email = ?, profile_image = ? WHERE user_id = ?");
+        $stmt->execute([$username, $phone_number, $email, $imagePath, $_SESSION['user_id']]);
+
+        // Step 4: Redirect to profile page if successful
+        header("Location: /public/profile.html"); // Adjust path if necessary
+        exit;
+    } catch (PDOException $e) {
+        // Display an error message if something goes wrong
+        echo "Error updating profile: " . $e->getMessage();
+    } finally {
+        // Disconnect from the database
+        $database->disconnect();
     }
+} else {
+    echo "Invalid request method.";
 }
+?>
