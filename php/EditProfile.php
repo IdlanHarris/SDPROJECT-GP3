@@ -10,7 +10,11 @@ error_reporting(E_ALL);
 
 if (!isset($_SESSION['user_id'])) {
     // Redirect to login if the user is not logged in
+<<<<<<< HEAD
     header("Location: login.php");
+=======
+    header("Location: Login.php");
+>>>>>>> e4547b7d87eca1b1007d6ca31503f00d8efc8fab
     exit;
 }
 
