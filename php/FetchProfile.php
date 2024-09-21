@@ -15,28 +15,25 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Database connection
-$db = new Database();
-$conn = $db->getConnection(); // Get the PDO connection
+// Create a new instance of the Database class and establish a connection
+$database = new Database();
+$connection = $database->connect();
 
-$userId = $_SESSION['user_id']; // User ID from session
-error_log("User ID: " . $userId); // Log the user ID
+try {
+    // Prepare and execute the query to fetch user profile data
+    $stmt = $connection->prepare("SELECT username, email, phone_number, profile_image FROM users WHERE user_id = ?");
+    $stmt->execute([$_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Prepare and execute the query to fetch user profile data
-$query = "SELECT username, email, phone_number, image FROM users WHERE id = :id";
-$stmt = $conn->prepare($query);
-$stmt->bindParam(':id', $userId);
-
-if ($stmt->execute()) {
-    $userProfile = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($userProfile) {
-        echo json_encode($userProfile);
+    if ($user) {
+        // Return user data as JSON
+        echo json_encode($user);
     } else {
         echo json_encode(['error' => 'No profile found']);
     }
-} else {
-    error_log("Query execution failed: " . print_r($stmt->errorInfo(), true));
-    echo json_encode(['error' => 'Query execution failed']);
+} catch (Exception $e) {
+    echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+} finally {
+    $database->disconnect(); // Disconnect from the database
 }
 ?>

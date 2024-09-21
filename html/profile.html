@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/css/profile.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="profile-container">
@@ -22,15 +23,15 @@
 
         <div class="mb-3">
             <label class="form-label"><strong>Username:</strong></label>
-            <p id="view-username">N/A</p>
+            <p id="view-username">Loading...</p>
         </div>
         <div class="mb-3">
             <label class="form-label"><strong>Email:</strong></label>
-            <p id="view-email">N/A</p>
+            <p id="view-email">Loading...</p>
         </div>
         <div class="mb-3">
             <label class="form-label"><strong>Phone Number:</strong></label>
-            <p id="view-phoneNumber">N/A</p>
+            <p id="view-phoneNumber">Loading...</p>
         </div>
         <a href="editProfile.html"><button class="btn btn-secondary btn-custom">Edit Profile</button></a>
         <a href="/html/changePass.html"><button class="btn btn-primary btn-custom mt-3">Change Password</button></a>
@@ -39,35 +40,31 @@
 
     <!-- Bootstrap JS (Optional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        // Load profile data when the page loads
-        document.addEventListener('DOMContentLoaded', loadProfile);
-
-        function loadProfile() {
-            fetch('./php/FetchProfile.php')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.json();
-                })
-                .then(profileData => {
-                    if (profileData && !profileData.error) {
-                        document.getElementById('view-image').src = profileData.image || '../assets/Default pfp.png';
-                        document.getElementById('view-username').textContent = profileData.username || 'N/A';
-                        document.getElementById('view-email').textContent = profileData.email || 'N/A';
-                        document.getElementById('view-phoneNumber').textContent = profileData.phone_number || 'N/A';
+        $(document).ready(function() {
+            $.ajax({
+                url: '../php/FetchProfile.php', // Path to your PHP file
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    if (data.error) {
+                        $('#view-username').text('N/A');
+                        $('#view-email').text('N/A');
+                        $('#view-phoneNumber').text('N/A');
                     } else {
-                        alert(profileData.error || "No profile found. Please create your profile first.");
-                        window.location.href = 'editProfile.html';
+                        $('#view-username').text(data.username);
+                        $('#view-email').text(data.email);
+                        $('#view-phoneNumber').text(data.phone_number);
+                        $('#view-image').attr('src', data.image ? data.image : '../assets/Default pfp.png');
                     }
-                })
-                .catch(error => {
-                    console.error('Error fetching profile data:', error);
-                    alert('An error occurred while loading profile data.');
-                });
-        }
+                },
+                error: function() {
+                    $('#view-username').text('Error loading data');
+                    $('#view-email').text('Error loading data');
+                    $('#view-phoneNumber').text('Error loading data');
+                }
+            });
+        });
     </script>
 </body>
 </html>
