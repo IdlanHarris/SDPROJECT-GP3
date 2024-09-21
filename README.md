@@ -35,11 +35,11 @@
     - This file should contain sensitive information like database credentials. Here's an example structure:
 
         ```
-        DB_HOST=localhost
-        DB_NAME=bronco_gym_db
-        DB_PORT=5432
-        DB_USERNAME=your_username
-        DB_PASSWORD=your_password
+        DB_HOST=aws-0-ap-southeast-1.pooler.supabase.com
+        DB_NAME=postgres
+        DB_PORT=6543
+        DB_USERNAME=postgres.vngbztccffaxwgmcyioh
+        DB_PASSWORD=Br0ncoGymD@tabase
         ```
 
     **Important:**  Do not commit the `.env` file to your version control system (e.g., Git) for security reasons.

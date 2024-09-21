@@ -49,7 +49,7 @@ if (!isset($_SESSION['user_id'])) {
                             <li><a class="dropdown-item" href="#calorie-calculator">Calculator</a></li>
                             <li><a class="dropdown-item" href="#gym-schedule">Schedule</a></li>
                             <li><a class="dropdown-item" href="#location">Location</a></li>
-                            <li><a class="dropdown-item" href="#about-contact">About & Contact</a></li>
+                            <li><a class="dropdown-item" href="ContAbout.html">About & Contact</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/php/Logout.php">Logout</a></li>
                         </ul>

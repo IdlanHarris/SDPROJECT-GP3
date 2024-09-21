@@ -16,13 +16,12 @@
             <hr>
         </div>
 
-        <div class="text-center">
-            <img id="editable-image" src="../assets/Default pfp.png" alt="Editable Image" width="150px" class="profile-image"><br>
-            <input type="file" id="upload-image" name="profile_image" accept="image/*" class="form-control mb-4">
-        </div>
-
         <!-- Use POST and point the form to editprofile.php -->
         <form id="profileForm" method="POST" action="../php/EditProfile.php" enctype="multipart/form-data">
+            <div class="text-center">
+                <img id="editable-image" src="../assets/Default pfp.png" alt="Editable Image" width="150px" class="profile-image"><br>
+                <input type="file" id="upload-image" name="profile_image" accept="image/*" class="form-control mb-4">
+            </div>
             <div class="mb-3">
                 <label for="username" class="form-label">Username:</label>
                 <input type="text" id="username" name="username" class="form-control">
@@ -36,7 +35,6 @@
                 <input type="number" id="PhoneNumber" name="phone_number" class="form-control">
             </div>
             <button type="submit" class="btn btn-primary btn-custom">Save</button>
-            <button type="button" class="btn btn-primary btn-custom">Change Password</button>
         </form>
     </div>
 

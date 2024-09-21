@@ -22,35 +22,64 @@ $connection = $database->connect();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Step 1: Retrieve and sanitize input data
-        $username = trim($_POST['username']);
-        $phone_number = trim($_POST['phone_number']);
-        $email = trim($_POST['email']);
-        
-        // Step 2: Handle image upload
-        $imagePath = null;
-        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == UPLOAD_ERR_OK) {
-            $uploadDir = __DIR__ . '/../uploads/';
-            $imageName = basename($_FILES['profile_image']['name']);
-            $imagePath = $uploadDir . $imageName;
+        // Step 1: Retrieve the current data from the database
+        $stmt = $connection->prepare("SELECT username, phone_number, email, profile_image FROM users WHERE user_id = ?");
+        $stmt->execute([$_SESSION['user_id']]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Move uploaded file to the uploads directory
-            if (!move_uploaded_file($_FILES['profile_image']['tmp_name'], $imagePath)) {
-                die("Failed to upload image.");
-            }
+        // Step 2: Initialize an array for dynamic query building
+        $updates = [];
+        $params = [];
 
-            // Store relative path to image
-            $imagePath = 'uploads/' . $imageName;
+        // Step 3: Check and sanitize input data, update if field is not empty
+        if (!empty(trim($_POST['username']))) {
+            $updates[] = "username = ?";
+            $params[] = trim($_POST['username']);
         }
 
-        // Step 3: Prepare and execute the update query
-        $stmt = $connection->prepare("UPDATE users SET username = ?, phone_number = ?, email = ?, profile_image = ? WHERE user_id = ?");
-        $stmt->execute([$username, $phone_number, $email, $imagePath, $_SESSION['user_id']]);
+        if (!empty(trim($_POST['phone_number']))) {
+            $updates[] = "phone_number = ?";
+            $params[] = trim($_POST['phone_number']);
+        }
 
-        // Step 4: Redirect to profile page if successful
-        header("Location: /public/profile.html"); // Adjust path if necessary
+        if (!empty(trim($_POST['email']))) {
+            $updates[] = "email = ?";
+            $params[] = trim($_POST['email']);
+        }
+
+        // Step 4: Handle image upload
+        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] == UPLOAD_ERR_OK) {
+            $uploadDir = __DIR__ . '/../uploads/';
+            $imageName = uniqid() . '_' . basename($_FILES['profile_image']['name']);
+            $newImagePath = $uploadDir . $imageName;
+
+            if (!move_uploaded_file($_FILES['profile_image']['tmp_name'], $newImagePath)) {
+                throw new Exception("Failed to upload image.");
+            }
+
+            $imagePath = 'uploads/' . $imageName;
+            $updates[] = "profile_image = ?";
+            $params[] = $imagePath;
+        }
+
+        // Step 5: Ensure we only update if there are fields to update
+        if (count($updates) > 0) {
+            // Append the user_id at the end for the WHERE clause
+            $params[] = $_SESSION['user_id'];
+
+            // Build the query dynamically
+            $query = "UPDATE users SET " . implode(', ', $updates) . " WHERE user_id = ?";
+            
+            // Step 6: Prepare and execute the update query
+            $stmt = $connection->prepare($query);
+            $stmt->execute($params);
+        }
+
+        // Step 7: Redirect to profile page if successful
+        header("Location: /html/profile.html"); // Adjust the path if necessary
         exit;
-    } catch (PDOException $e) {
+
+    } catch (Exception $e) {
         // Display an error message if something goes wrong
         echo "Error updating profile: " . $e->getMessage();
     } finally {
