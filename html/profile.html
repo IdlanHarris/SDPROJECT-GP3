@@ -51,11 +51,12 @@
                         $('#view-username').text('N/A');
                         $('#view-email').text('N/A');
                         $('#view-phoneNumber').text('N/A');
+                        $('#view-image').attr('src', '../assets/Default pfp.png');
                     } else {
                         $('#view-username').text(data.username);
                         $('#view-email').text(data.email);
                         $('#view-phoneNumber').text(data.phone_number);
-                        $('#view-image').attr('src', data.image ? data.image : '../assets/Default pfp.png');
+                        $('#view-image').attr('src', data.profile_image ? '../' + data.profile_image : '../assets/Default pfp.png');
                     }
                 },
                 error: function() {

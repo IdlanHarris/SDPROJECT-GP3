@@ -26,7 +26,8 @@ try {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
-        // Return user data as JSON
+        // If profile_image is null or empty, provide a default image
+        $user['profile_image'] = $user['profile_image'] ?: 'assets/Default pfp.png';
         echo json_encode($user);
     } else {
         echo json_encode(['error' => 'No profile found']);
