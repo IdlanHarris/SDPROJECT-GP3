@@ -28,7 +28,7 @@ if (!isset($_SESSION['user_id'])) {
 <div class="sidebar" id="mySidebar">
   <h2>Staff</h2>
   <ul class="nav nav-pills nav-stacked">
-    <li><a href="profile.html">Profile</a></li>
+    <li><a href="/html/profile.html">Profile</a></li>
     <li><a href="#section1">Statistics</a></li>
     <li><a href="#section3">Products Information</a></li>
     <li><a href="#section4">Customer Orders</a></li>

@@ -28,6 +28,9 @@ try {
     if ($user) {
         // If profile_image is null or empty, provide a default image
         $user['profile_image'] = $user['profile_image'] ?: 'assets/Default pfp.png';
+        
+        // Include the user_id in the response
+        $user['user_id'] = $_SESSION['user_id'];
         echo json_encode($user);
     } else {
         echo json_encode(['error' => 'No profile found']);

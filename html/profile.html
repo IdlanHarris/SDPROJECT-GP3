@@ -35,15 +35,15 @@
         </div>
         <a href="editProfile.html"><button class="btn btn-secondary btn-custom">Edit Profile</button></a>
         <a href="/html/changePass.html"><button class="btn btn-primary btn-custom mt-3">Change Password</button></a>
-        <a href="/html/memberHomePage.php"><button class="btn btn-primary btn-custom mt-3">Home</button></a>    
+        <button class="btn btn-primary btn-custom mt-3" id="home-button">Home</button>
     </div>
 
-    <!-- Bootstrap JS (Optional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Fetch profile data from server-side script
             $.ajax({
-                url: '../php/FetchProfile.php', // Path to your PHP file
+                url: '../php/FetchProfile.php',
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
@@ -57,12 +57,39 @@
                         $('#view-email').text(data.email);
                         $('#view-phoneNumber').text(data.phone_number);
                         $('#view-image').attr('src', data.profile_image ? '../' + data.profile_image : '../assets/Default pfp.png');
+
+                        // Set user_id in the home button for redirection
+                        $('#home-button').data('user-id', data.user_id);
                     }
                 },
                 error: function() {
                     $('#view-username').text('Error loading data');
                     $('#view-email').text('Error loading data');
                     $('#view-phoneNumber').text('Error loading data');
+                    $('#view-image').attr('src', '../assets/Default pfp.png');
+                }
+            });
+
+            // Redirect based on user_id prefix when clicking Home button
+            $('#home-button').on('click', function() {
+                const userId = $(this).data('user-id');
+                if (userId) {
+                    const prefix = userId.charAt(0);
+                    switch (prefix) {
+                        case 'A':
+                            window.location.href = '/html/admin/adminDashboard.php';
+                            break;
+                        case 'S':
+                            window.location.href = '/html/staff/staffDashboard.php';
+                            break;
+                        case 'M':
+                            window.location.href = '/html/memberHomepage.php';
+                            break;
+                        default:
+                            alert('Role not recognized');
+                    }
+                } else {
+                    alert('User ID not found.');
                 }
             });
         });
