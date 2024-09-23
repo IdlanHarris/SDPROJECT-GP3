@@ -248,7 +248,7 @@ if (!isset($_SESSION['user_id'])) {
 <section id="workout-list" class="py-5 bg-light border-bottom">
     <div class="container px-5 my-5">
         <div class="text-center mb-5">
-            <h2 class="fw-bolder">Workout List</h2>
+            <h2 class="fw-bolder">Workout Plan</h2>
             <p class="lead mb-0">Explore our workout plans designed to help you achieve your fitness goals.</p>
         </div>
 
@@ -284,7 +284,7 @@ if (!isset($_SESSION['user_id'])) {
             <!-- Workout 3 -->
             <div class="col-lg-4 col-xl-4 d-flex">
                 <div class="card flex-fill" style="min-height: 300px;">
-                    <img src="/assets/CORE.jpg" class="card-img-top my-4" alt="Workout 3" style="height: 150px; object-fit: contain;">
+                    <img src="/assets/nopey.jpg" class="card-img-top my-4" alt="Workout 3" style="height: 230px; object-fit: cover;">
                     <div class="card-body d-flex flex-column">
                         <div class="mb-3">
                             <span class="display-6 fw-normal">Core Strength</span>
@@ -312,23 +312,23 @@ if (!isset($_SESSION['user_id'])) {
             
             <!-- Trainer card 1 -->
             <div class="col-lg-4 col-xl-4 d-flex">
-                <div class="card mb-5 mb-xl-0 flex-fill" style="min-height: 300px;">
-                    <img src="/assets/trainer_1.jpg" class="card-img-top my-4" alt="Trainer 1" style="height: 150px; object-fit: contain;">
-                    <div class="card-body d-flex flex-column">
-                        <div class="small text-uppercase fw-bold text-muted">John Doe</div>
-                        <div class="mb-3">
-                            <span class="display-6 fw-normal">Personal Trainer</span>
+                        <div class="card mb-5 mb-xl-0 flex-fill" style="min-height: 300px;">
+                            <img src="../assets/trainer_1.jpg" class="card-img-top my-4" alt="Trainer 1" style="height: 230px; object-fit: cover;">
+                            <div class="card-body d-flex flex-column">
+                                <div class="small text-uppercase fw-bold text-muted">John Doe</div>
+                                <div class="mb-3">
+                                    <span class="display-6 fw-normal">Personal Trainer</span>
+                                </div>
+                                <p class="card-text flex-grow-1">John is an experienced trainer specializing in strength training and nutrition. He helps clients build muscle and achieve their fitness goals with personalized workout plans.</p>
+                                <div class="d-grid"><a class="btn btn-primary" href="#!">Book a Session</a></div>
+                            </div>
                         </div>
-                        <p class="card-text flex-grow-1">John is an experienced trainer specializing in strength training and nutrition. He helps clients build muscle and achieve their fitness goals with personalized workout plans.</p>
-                        <div class="d-grid"><a class="btn btn-primary" href="#!">Book a Session</a></div>
                     </div>
-                </div>
-            </div>
 
             <!-- Trainer card 2 -->
             <div class="col-lg-4 col-xl-4 d-flex">
                 <div class="card mb-5 mb-xl-0 flex-fill" style="min-height: 300px;">
-                    <img src="/assets/trainer_2.png" class="card-img-top my-4" alt="Trainer 2" style="height: 150px; object-fit: contain;">
+                    <img src="/assets/trainer_2.png" class="card-img-top my-4" alt="Trainer 2" style="height: 230px; object-fit: cover;">
                     <div class="card-body d-flex flex-column">
                         <div class="small text-uppercase fw-bold text-muted">Jane Smith</div>
                         <div class="mb-3">
@@ -343,7 +343,7 @@ if (!isset($_SESSION['user_id'])) {
             <!-- Trainer card 3 -->
             <div class="col-lg-4 col-xl-4 d-flex">
                 <div class="card flex-fill" style="min-height: 300px;">
-                    <img src="/assets/trainer_3.jpg" class="card-img-top my-4" alt="Trainer 3" style="height: 150px; object-fit: contain;">
+                    <img src="/assets/trainer_3.jpg" class="card-img-top my-4" alt="Trainer 3" style="height: 230px; object-fit: cover;">
                     <div class="card-body d-flex flex-column">
                         <div class="small text-uppercase fw-bold text-muted">Emily Davis</div>
                         <div class="mb-3">
