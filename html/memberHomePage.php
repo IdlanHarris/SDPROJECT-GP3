@@ -256,7 +256,7 @@ if (!isset($_SESSION['user_id'])) {
             <!-- Workout 1 -->
             <div class="col-lg-4 col-xl-4 d-flex">
                 <div class="card mb-5 mb-xl-0 flex-fill" style="min-height: 300px;">
-                    <img src="/assets/HIIT.jpg" class="card-img-top my-4" alt="Workout 1" style="height: 150px; object-fit: contain;">
+                    <img src="/assets/HIIT.jpg" class="card-img-top my-4" alt="Workout 1" style="height: 230px; object-fit: cover;">
                     <div class="card-body d-flex flex-column">
                         <div class="mb-3">
                             <span class="display-6 fw-normal">HIIT Workout</span>
@@ -270,7 +270,7 @@ if (!isset($_SESSION['user_id'])) {
             <!-- Workout 2 -->
             <div class="col-lg-4 col-xl-4 d-flex">
                 <div class="card mb-5 mb-xl-0 flex-fill" style="min-height: 300px;">
-                    <img src="/assets/YOGA.jpg" class="card-img-top my-4" alt="Workout 2" style="height: 150px; object-fit: contain;">
+                    <img src="/assets/YOGA.jpg" class="card-img-top my-4" alt="Workout 2" style="height: 230px; object-fit: cover;">
                     <div class="card-body d-flex flex-column">
                         <div class="mb-3">
                             <span class="display-6 fw-normal">Yoga Flow</span>
