@@ -132,6 +132,120 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </section>
 
+
+        <!-- Pricing section-->
+        <section class="bg-light py-5 border-bottom">
+            <div class="container px-5 my-1">
+
+                <div class="text-center mb-5">
+                    <h2 class="fw-bolder">Bronco Gym Fitness - Membership Plans</h2>
+                    <p class="lead mb-0">Become Our Gym Member Today!</p>
+                </div>
+
+                <div class="row gx-5 justify-content-center">
+                    
+                    <!-- Pricing card basic-->
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="card mb-5 mb-xl-0">
+                            <div class="card-body p-5">
+                                <div class="small text-uppercase fw-bold text-muted">Basic</div>
+                                <div class="mb-3">
+                                    <span class="display-6 fw-bold">RM60</span>
+                                    <span class="text-muted">/ mo.</span>
+                                </div>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Access to gym anytime during operating hours
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Access to all website features
+                                    </li>
+                                    <li class="mb-2 text-muted">
+                                        <i class="bi bi-x"></i>
+                                        10% discount on any purchase products
+                                    </li>
+                                    <li class="mb-2 text-muted">
+                                        <i class="bi bi-x"></i>
+                                        First priority to any personal trainer
+                                    </li>
+                                </ul>
+                                <div class="d-grid"><a class="btn btn-outline-primary" href="#!">Choose plan</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pricing card gold-->
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="card mb-5 mb-xl-0">
+                            <div class="card-body p-5">
+                                <div class="small text-uppercase fw-bold text-muted">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    Pro</div>
+                                <div class="mb-3">
+                                    <span class="display-6 fw-bold">RM75</span>
+                                    <span class="text-muted">/ mo.</span>
+                                </div>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Access to gym anytime during operating hours
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Access to all website features
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        10% discount on any purchase products
+                                    </li>
+                                    <li class="mb-2 text-muted">
+                                        <i class="bi bi-x"></i>
+                                        First priority to any personal trainer
+                                    </li>
+                                </ul>
+                                <div class="d-grid"><a class="btn btn-primary" href="#!">Choose plan</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pricing card premium-->
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="card">
+                            <div class="card-body p-5">
+                                <div class="small text-uppercase fw-bold text-muted">Premium</div>
+                                <div class="mb-3">
+                                    <span class="display-6 fw-bold">RM90</span>
+                                    <span class="text-muted">/ mo.</span>
+                                </div>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Access to gym anytime during operating hours
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Access to all website features
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        15% discount on any purchase products
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        First priority to any personal trainer
+                                    </li>
+                                </ul>
+                                <div class="d-grid"><a class="btn btn-outline-primary" href="#!">Choose plan</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
         <!-- Product Showcase section-->
         <section class="bg-light py-5 border-bottom">
             <div class="container px-5 my-1">
