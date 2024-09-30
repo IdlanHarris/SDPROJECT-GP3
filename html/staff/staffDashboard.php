@@ -68,6 +68,53 @@ if (!isset($_SESSION['user_id'])) {
     </div>
   </div>
 
+  <!-- Add/Remove Member Section -->
+  <div id="section2" class="well">
+    <h4>Manage Member</h4>
+    <!-- View Member -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Member ID</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>M1</td>
+          <td>chombi</td>
+          <td>idlan1@gmail.com</td>
+          <td>123</td>
+        </tr>
+              </tbody>
+    </table>
+    <!-- Button to Remove Staff -->
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeMemberModal">Remove Member</button>
+  </div>
+
+  <!-- Remove Member Modal -->
+  <div id="removeMemberModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Remove Member</h4>
+        </div>
+        <div class="modal-body">
+          <form action="/" method="POST">
+            <div class="form-group">
+              <label for="removeMemberID">Member ID:</label>
+              <input type="text" class="form-control" id="removeMemberID" name="user_id" placeholder="Enter Member ID">
+            </div>
+            <button type="submit" class="btn btn-danger">Remove Member</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Product Information Table -->
   <div id="section3" class="well">
     <h4>Product Information</h4>
