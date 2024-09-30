@@ -8,6 +8,7 @@ $connection = $database->connect();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
+        // ADD STAFF
         if (isset($_POST['username'])) {
             // Add Staff Action
 
@@ -45,13 +46,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Step 5: Insert the new user into the database with the custom user_id
             $stmt = $connection->prepare("INSERT INTO users (user_id, username, email, password, phone_number, user_type) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$newUserId, $username, $email, $password, $phoneNumber, 'staff']);
+            $stmt->execute([$newUserId, $username, $email, $passwordHash, $phoneNumber, 'staff']);
 
             // Redirect to the admin dashboard with a success parameter
             header("Location: /html/admin/adminDashboard.php");
             exit();
 
-        } elseif (isset($_POST['user_id'])) {
+        // REMOVE STAFF
+        } elseif (isset($_POST['user_id']) && empty($_POST['username'])) {
             // Remove Staff Action
         
             // Step 1: Retrieve and sanitize input data
@@ -71,6 +73,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: /html/admin/adminDashboard.php");
                 exit();
             }
+
+        // EDIT STAFF
+        } elseif (isset($_POST['edit_user_id'])) {
+            // Edit Staff Action
+            
+            // Step 1: Retrieve and sanitize input data
+            $userId = trim($_POST['edit_user_id']);
+            $newUsername = trim($_POST['edit_username']);
+            $newEmail = trim($_POST['edit_email']);
+            $newPhoneNumber = trim($_POST['edit_phone_number']);
+            $newPassword = trim($_POST['edit_password']); 
+
+            // Check if the staff ID is valid
+            if (empty($userId) || !preg_match("/^S_\d{3}$/", $userId)) {
+                header("Location: /html/admin/adminDashboard.php?error=invalid_id");
+                exit();
+            }
+
+            // Step 2: Fetch the current staff details
+            $stmt = $connection->prepare("SELECT * FROM users WHERE user_id = ?");
+            $stmt->execute([$userId]);
+            $staff = $stmt->fetch();
+
+            if (!$staff) {
+                header("Location: /html/admin/adminDashboard.php?error=staff_not_found");
+                exit();
+            }
+
+            // Step 3: Prepare the update query with new values if provided
+            $updateQuery = "UPDATE users SET username = ?, email = ?, phone_number = ?, password = ? WHERE user_id = ?";
+
+            // Use current values if no new data is provided
+            $newUsername = !empty($newUsername) ? $newUsername : $staff['username'];
+            $newEmail = !empty($newEmail) ? $newEmail : $staff['email'];
+            $newPhoneNumber = !empty($newPhoneNumber) ? $newPhoneNumber : $staff['phone_number'];
+            $newPassword = !empty($newPassword) ? password_hash($newPassword, PASSWORD_DEFAULT) : $staff['password'];
+
+            // Step 4: Execute the update
+            $stmt = $connection->prepare($updateQuery);
+            $stmt->execute([$newUsername, $newEmail, $newPhoneNumber, $newPassword, $userId]);
+
+            // Redirect to the admin dashboard with a success message
+            header("Location: /html/admin/adminDashboard.php?success=staff_updated");
+            exit();
         }
 
     } catch (PDOException $e) {
