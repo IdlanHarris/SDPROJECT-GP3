@@ -30,6 +30,7 @@ if (!isset($_SESSION['user_id'])) {
   <ul class="nav nav-pills nav-stacked">
     <li><a href="/html/profile.html">Profile</a></li>
     <li><a href="#section1">Statistics</a></li>
+    <li><a href="#section2">Manage Member</a></li>
     <li><a href="#section3">Products Information</a></li>
     <li><a href="#section4">Customer Orders</a></li>
     <li><a href="/php/LogOut.php">Logout</a></li>
