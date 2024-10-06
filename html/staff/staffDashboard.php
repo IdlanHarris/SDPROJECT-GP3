@@ -89,7 +89,7 @@ if (!isset($_SESSION['user_id'])) {
           <td>idlan1@gmail.com</td>
           <td>123</td>
         </tr>
-              </tbody>
+      </tbody>
     </table>
     <!-- Button to Remove Staff -->
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeMemberModal">Remove Member</button>
