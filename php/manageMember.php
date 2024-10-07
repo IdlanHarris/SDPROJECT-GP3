@@ -9,9 +9,9 @@ session_start(); // Ensure session is started
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Check if the user is logged in as admin
-if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'admin') {
-    header("Location: /"); // Redirect to the login page if not logged in as admin
+// Check if the user is logged in as admin or staff
+if (!isset($_SESSION['user_id']) || ($_SESSION['user_type'] !== 'admin' && $_SESSION['user_type'] !== 'staff')) {
+    header("Location: /"); // Redirect to the login page if not logged in as admin or staff
     exit();
 }
 
