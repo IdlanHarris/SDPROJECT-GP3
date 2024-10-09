@@ -32,8 +32,9 @@ if (!isset($_SESSION['user_id'])) {
   <ul class="nav nav-pills nav-stacked">
     <li><a href="/html/profile.html">Profile</a></li>
     <li><a href="#section1">Statistics</a></li>
+    <li><a href="#section5">Membership List</a></li>
     <li><a href="#section2">Manage Staff</a></li>
-    <li><a href="#section2">Manage Member</a></li>
+    <li><a href="#section6">Manage Member</a></li>
     <li><a href="#section3">Products Information</a></li>
     <li><a href="#section4">Customer Orders</a></li>
     <li><a href="/php/LogOut.php">Logout</a></li>
@@ -70,7 +71,57 @@ if (!isset($_SESSION['user_id'])) {
     </div>
   </div>
   
-  <!-- Add/Remove Staff Section -->
+  <!-- Membership List Section -->
+  <div id="section5" class="well">
+    <h4>Membership List</h4>
+    <!-- View Membership -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Information</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Basic</td>
+          <td>RM60</td>
+          <td>
+            <ul>
+              <li>Access to gym anytime during operating hours</li>
+              <li>Access to all website features</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Pro</td>
+          <td>RM75</td>
+          <td>
+            <ul>
+              <li>Access to gym anytime during operating hours</li>
+              <li>10% discount on any purchase products</li>
+              <li>Access to all website features</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Premium</td>
+          <td>RM90</td>
+          <td>
+            <ul>
+              <li>Access to gym anytime during operating hours</li>
+              <li>15% discount on any purchase products</li>
+              <li>Access to all website features</li>
+              <li>First priority to any personal trainer</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Manage Staff Section -->
   <div id="section2" class="well">
     <h4>Manage Staff</h4>
     <!-- View Member -->
@@ -152,10 +203,8 @@ if (!isset($_SESSION['user_id'])) {
       </div>
     </div>
   </div>
-
   <!-- Manage Member Section -->
-   <!-- Manage Member Section -->
-   <div id="section2" class="well">
+  <div id="section6" class="well">
         <h4>Manage Member</h4>
         <!-- Button to Manage Members -->
         <a href="/php/manageMember.php" class="btn btn-info">Manage Member</a>
