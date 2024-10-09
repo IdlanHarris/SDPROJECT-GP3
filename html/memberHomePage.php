@@ -49,7 +49,8 @@ if (!isset($_SESSION['user_id'])) {
                             <li><a class="dropdown-item" href="#calorie-calculator">Calculator</a></li>
                             <li><a class="dropdown-item" href="#gym-schedule">Schedule</a></li>
                             <li><a class="dropdown-item" href="#location">Location</a></li>
-                            <li><a class="dropdown-item" href="ContAbout.html">About & Contact</a></li>
+                            <li><a class="dropdown-item" href="/html/AboutUs.html">About Us</a></li>
+                            <li><a class="dropdown-item" href="/html/ContactUs.html">Contact Us</a></li>
                             <li><a class="dropdown-item" href="feedback.html">Feedback</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/php/Logout.php">Logout</a></li>
@@ -61,7 +62,7 @@ if (!isset($_SESSION['user_id'])) {
     </nav>
 
 <!-- Header -->
-<header class="header-bg" style="position: relative;
+<header id="header" class="header-bg" style="position: relative;
     background: url('/assets/gym_bg.jpg') no-repeat center center;
     background-size: cover; /* Make the image cover the entire header */
     background-position: center;
@@ -475,7 +476,7 @@ if (!isset($_SESSION['user_id'])) {
 
 
         <!-- Location Section -->
-        <section id="location" class="bg-dark text-light content-section text-center py-4">
+        <section id="location" class="bg-light text-dark content-section text-center py-4">
             <div class="container px-3">
                 <div class="text-center mb-3">
                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-2"><i class="bi bi-map"></i></div>
@@ -492,9 +493,56 @@ if (!isset($_SESSION['user_id'])) {
         </section>
         
         <!-- Footer-->
-        <footer class="py-3 bg-dark">
-            <div class="container px-5"><p class="m-0 text-center text-white">&copy; 2024 Bronco Gym Fitness. All rights reserved.</p></div>
+        <footer class="py-4 bg-dark text-white">
+            <div class="container">
+                <div class="row">
+                    <!-- About Section -->
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <h5>About Bronco Gym</h5>
+                        <p>Bronco Gym Fitness is committed to helping you achieve your fitness goals. Join us today for a healthier lifestyle.</p>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="col-lg-2 col-md-6 mb-4">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#header" class="text-white">Home</a></li>
+                            <li><a href="#workout-list" class="text-white">Services</a></li>
+                            <li><a href="/html/AboutUs.html" class="text-white">About Us</a></li>
+                            <li><a href="/html/ContactUs.html" class="text-white">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <h5>Contact Us</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-geo-alt-fill"></i> UTM Kuala Lumpur</li>
+                            <li><i class="bi bi-telephone-fill"></i> +(123) 456-7890</li>
+                            <li><i class="bi bi-envelope-fill"></i> broncogymutmkl@gmail.com</li>
+                        </ul>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="col-lg-3 col-md-6 mb-4 text-center">
+                        <h5>Follow Us</h5>
+                        <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <hr class="border-secondary">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <p class="m-0">&copy; 2024 Bronco Gym Fitness. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
         </footer>
+
+        <!-- Bootstrap Icons (Optional) -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
