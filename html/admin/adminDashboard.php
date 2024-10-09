@@ -146,7 +146,9 @@ $memberResult = $connection->query($memberQuery);
   </table>
 </div>
 
-    
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#addStaffModal">
+    Add Staff
+</button>
     <a href="/php/manageStaff.php" class="btn btn-info">Manage Staff</a>
   </div>
 
@@ -245,6 +247,90 @@ $memberResult = $connection->query($memberQuery);
     </table>
   </div>
 </div>
+
+<!-- Add Staff Modal -->
+<div class="modal fade" id="addStaffModal" tabindex="-1" role="dialog" aria-labelledby="addStaffModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addStaffModalLabel">Add Staff</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="/php/addStaff.php" method="post">
+            <div class="form-group">
+              <label for="staffUsername">Username</label>
+              <input type="text" class="form-control" id="staffUsername" name="username" required>
+            </div>
+            <div class="form-group">
+              <label for="staffEmail">Email</label>
+              <input type="email" class="form-control" id="staffEmail" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="staffPhone">Phone Number</label>
+              <input type="tel" class="form-control" id="staffPhone" name="phone_number" required>
+            </div>
+            <div class="form-group">
+              <label for="staffPassword">Password</label>
+              <input type="password" class="form-control" id="staffPassword" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Staff</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <script>
+$(document).ready(function () {
+    $('#addStaffModal form').on('submit', function (e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        $.ajax({
+            type: 'POST',
+            url: '/php/addStaff.php', // Correct path to the PHP file handling the form submission
+            data: $(this).serialize(), // Serialize the form data
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    // Close the modal
+                    $('#addStaffModal').modal('hide');
+
+                    // Optionally reset the form fields
+                    $('#addStaffModal form')[0].reset();
+
+                    // Update the table with the new staff member
+                    updateStaffTable(response.staff); // Assuming response contains the staff data
+                } else {
+                    alert(response.message); // Show error message
+                }
+            },
+            error: function () {
+                alert('An error occurred. Please try again.');
+            }
+        });
+    });
+
+    // Function to update the staff table
+    function updateStaffTable(staff) {
+        const newRow = `<tr>
+            <td>${staff.user_id}</td>
+            <td>${staff.username}</td>
+            <td>${staff.email}</td>
+            <td>${staff.phone_number}</td>
+            
+        </tr>`;
+
+        $('#staffTableBody').append(newRow); // Update the staff table body
+    }
+});
+</script>
+
+
 
 </body>
 </html>

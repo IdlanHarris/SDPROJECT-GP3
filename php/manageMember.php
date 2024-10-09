@@ -63,6 +63,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_id'])) {
     exit(); // Exit after processing AJAX request
 }
 
+// Handle staff addition when the 'add_staff' parameter is sent via AJAX
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_staff'])) {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $phoneNumber = $_POST['phone_number'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password before storing
+
+    // Insert the new staff member into the database
+    $query = "INSERT INTO users (user_id, username, email, phone_number, password, user_type) VALUES (:user_id, :username, :email, :phone_number, :password, 'staff')";
+    $statement = $connection->prepare($query);
+    $user_id = 'S' . uniqid(); // Generate a unique staff ID starting with 'S'
+    $statement->bindParam(':user_id', $user_id);
+    $statement->bindParam(':username', $username);
+    $statement->bindParam(':email', $email);
+    $statement->bindParam(':phone_number', $phoneNumber);
+    $statement->bindParam(':password', $password);
+
+    if ($statement->execute()) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Error: Could not add the staff member.']);
+    }
+    exit(); // Exit after processing AJAX request
+}
+
 // Fetch all users with the role of 'member'
 $query = "SELECT user_id, username, email, phone_number FROM users WHERE user_type = 'member'";
 $result = $connection->query($query);
@@ -85,6 +110,7 @@ $result = $connection->query($query);
 <!-- Manage Member Content -->
 <div class="container">
   <h2>Manage Member</h2>
+ 
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -114,6 +140,7 @@ $result = $connection->query($query);
       ?>
     </tbody>
   </table>
+
 
   <!-- Edit Member Modal -->
   <div id="editMemberModal" class="modal fade" role="dialog">
@@ -145,52 +172,22 @@ $result = $connection->query($query);
     </div>
   </div>
 
-</div>
+ 
 
+<!-- JavaScript to handle functionality -->
 <script>
-// Function to handle member removal
-$(document).on('click', '.remove-btn', function() {
-    const userId = $(this).closest('tr').data('user-id');
-    if (confirm('Are you sure you want to remove this member?')) {
-        $.ajax({
-            type: 'POST',
-            url: 'manageMember.php', // The same page handles the AJAX request
-            data: { remove_id: userId },
-            success: function(response) {
-                const result = JSON.parse(response);
-                if (result.success) {
-                    // Remove the row from the table
-                    $('tr[data-user-id="' + userId + '"]').remove();
-                } else {
-                    alert(result.message);
-                }
-            },
-            error: function() {
-                alert('An error occurred while removing the member.');
-            }
-        });
-    }
-});
 
-// Function to handle editing member information
+// Handle the "Edit" button click to populate the modal
 $(document).on('click', '.edit-btn', function() {
     const row = $(this).closest('tr');
-    const userId = row.data('user-id');
-    const username = row.find('.username').text();
-    const email = row.find('.email').text();
-    const phoneNumber = row.find('.phone-number').text();
-
-    // Populate the modal with current member information
-    $('#editMemberId').val(userId);
-    $('#editUsername').val(username);
-    $('#editEmail').val(email);
-    $('#editPhoneNumber').val(phoneNumber);
-
-    // Show the modal
+    $('#editMemberId').val(row.data('user-id'));
+    $('#editUsername').val(row.find('.username').text());
+    $('#editEmail').val(row.find('.email').text());
+    $('#editPhoneNumber').val(row.find('.phone-number').text());
     $('#editMemberModal').modal('show');
 });
 
-// Handle form submission for editing member information
+// Handle form submission for editing a member's information
 $('#editMemberForm').on('submit', function(e) {
     e.preventDefault();
 
@@ -202,7 +199,7 @@ $('#editMemberForm').on('submit', function(e) {
     // Send the updated member information to the server via AJAX
     $.ajax({
         type: 'POST',
-        url: 'manageMember.php',
+        url: 'manageMember.php', // The server-side script that handles the member editing
         data: {
             edit_id: userId,
             username: username,
@@ -212,14 +209,9 @@ $('#editMemberForm').on('submit', function(e) {
         success: function(response) {
             const result = JSON.parse(response);
             if (result.success) {
-                // Update the member's information in the table
-                const row = $('tr[data-user-id="' + userId + '"]');
-                row.find('.username').text(username);
-                row.find('.email').text(email);
-                row.find('.phone-number').text(phoneNumber);
-                
-                // Hide the modal
+                alert('Member information updated successfully.');
                 $('#editMemberModal').modal('hide');
+                location.reload(); // Reload the page to see the updated member information
             } else {
                 alert(result.message);
             }
@@ -229,7 +221,34 @@ $('#editMemberForm').on('submit', function(e) {
         }
     });
 });
-</script>
 
+// Handle the "Remove" button click
+$(document).on('click', '.remove-btn', function() {
+    const row = $(this).closest('tr');
+    const userId = row.data('user-id');
+
+    // Confirm deletion
+    if (confirm('Are you sure you want to remove this member?')) {
+        // Send the remove request to the server via AJAX
+        $.ajax({
+            type: 'POST',
+            url: 'manageMember.php', // The server-side script that handles the member removal
+            data: { remove_id: userId },
+            success: function(response) {
+                const result = JSON.parse(response);
+                if (result.success) {
+                    alert('Member removed successfully.');
+                    row.remove(); // Remove the row from the table
+                } else {
+                    alert(result.message);
+                }
+            },
+            error: function() {
+                alert('An error occurred while removing the member.');
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>

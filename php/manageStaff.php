@@ -68,7 +68,6 @@ $query = "SELECT user_id, username, email, phone_number FROM users WHERE user_ty
 $result = $connection->query($query);
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,6 +85,7 @@ $result = $connection->query($query);
 <!-- Manage Staff Content -->
 <div class="container">
   <h2>Manage Staff</h2>
+
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -116,7 +116,6 @@ $result = $connection->query($query);
     </tbody>
   </table>
 
-  
   <!-- Edit Staff Modal -->
   <div id="editStaffModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -146,103 +145,81 @@ $result = $connection->query($query);
       </div>
     </div>
   </div>
+
 </div>
 
 <script>
-// Handle form submission for editing staff information
-$('#editStaffForm').on('submit', function(e) {
-    e.preventDefault();
+$(document).ready(function() {
+  // Handle the removal of a staff member
+  $(document).on('click', '.remove-btn', function() {
+    const row = $(this).closest('tr');
+    const staffId = row.data('user-id');
 
-    const staffId = $('#editStaffId').val();
-    const username = $('#editUsername').val();
-    const email = $('#editEmail').val();
-    const phoneNumber = $('#editPhoneNumber').val();
-
-    // Send the updated staff information to the server via AJAX
-    $.ajax({
-        type: 'POST',
-        url: 'manageStaff.php',
-        data: {
-            edit_id: staffId,
-            username: username,
-            email: email,
-            phone_number: phoneNumber
-        },
-        success: function(response) {
-            console.log('Server Response:', response); // Log the server response for debugging
-            try {
-                const result = JSON.parse(response);
-                if (result.success) {
-                    // Update the staff member's information in the table
-                    const row = $('tr[data-user-id="' + staffId + '"]');
-                    row.find('.username').text(username);
-                    row.find('.email').text(email);
-                    row.find('.phone-number').text(phoneNumber);
-                    $('#editStaffModal').modal('hide');
-                } else {
-                    alert(result.message);
-                }
-            } catch (error) {
-                console.error('Error parsing JSON response:', error);
-                alert('An unexpected error occurred while processing the response.');
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('AJAX Error:', error);
-            alert('An error occurred while updating the staff member information.');
-        }
+    $.post('', { remove_id: staffId })
+    .done(function(response) {
+      const data = JSON.parse(response);
+      if (data.success) {
+        row.remove(); // Remove the staff member row
+      } else {
+        alert('Error: ' + data.message); // Display error message
+      }
+    })
+    .fail(function(xhr, status, error) {
+      console.error('Error:', status, error);
+      alert('Error occurred: ' + xhr.responseText);
     });
-});
+  });
 
-// Handle remove button click
-$(document).on('click', '.remove-btn', function() {
-    const staffId = $(this).closest('tr').data('user-id');
-
-    // Confirm before removing
-    if (confirm('Are you sure you want to remove this staff member?')) {
-        $.ajax({
-            type: 'POST',
-            url: 'manageStaff.php',
-            data: { remove_id: staffId },
-            success: function(response) {
-                console.log('Server Response:', response); // Log the server response for debugging
-                try {
-                    const result = JSON.parse(response);
-                    if (result.success) {
-                        // Remove the row from the table
-                        $('tr[data-user-id="' + staffId + '"]').remove();
-                    } else {
-                        alert(result.message);
-                    }
-                } catch (error) {
-                    console.error('Error parsing JSON response:', error);
-                    alert('An unexpected error occurred while processing the response.');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('AJAX Error:', error);
-                alert('An error occurred while removing the staff member.');
-            }
-        });
-    }
-});
-
-// Handle edit button click
-$(document).on('click', '.edit-btn', function() {
+  // Handle the editing of a staff member
+  $(document).on('click', '.edit-btn', function() {
     const row = $(this).closest('tr');
     const staffId = row.data('user-id');
     const username = row.find('.username').text();
     const email = row.find('.email').text();
     const phoneNumber = row.find('.phone-number').text();
 
-    // Populate the modal fields with current data
+    // Set the values in the edit modal
     $('#editStaffId').val(staffId);
     $('#editUsername').val(username);
     $('#editEmail').val(email);
     $('#editPhoneNumber').val(phoneNumber);
 
-    // Show the modal
-    $('#editStaffModal').modal('show');
+    $('#editStaffModal').modal('show'); // Show the edit modal
+  });
+
+  // Handle the submission of the edit form
+  $('#editStaffForm').on('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const staffId = $('#editStaffId').val();
+    const username = $('#editUsername').val();
+    const email = $('#editEmail').val();
+    const phoneNumber = $('#editPhoneNumber').val();
+
+    $.post('', {
+      edit_id: staffId,
+      username: username,
+      email: email,
+      phone_number: phoneNumber
+    })
+    .done(function(response) {
+      const data = JSON.parse(response);
+      if (data.success) {
+        // Update the row with new values
+        const row = $(`tr[data-user-id='${staffId}']`);
+        row.find('.username').text(username);
+        row.find('.email').text(email);
+        row.find('.phone-number').text(phoneNumber);
+        $('#editStaffModal').modal('hide'); // Hide the modal
+      } else {
+        alert('Error: ' + data.message); // Display error message
+      }
+    })
+    .fail(function(xhr, status, error) {
+      console.error('Error:', status, error);
+      alert('Error occurred: ' + xhr.responseText);
+    });
+  });
 });
 </script>
 
