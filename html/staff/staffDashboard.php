@@ -7,7 +7,26 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: /");
     exit();
 }
+
+// Include Composer's autoload file
+require __DIR__ . '/../../vendor/autoload.php';
+
+// Use the App\Database namespace
+use App\Database;
+
+// Create a new instance of the Database class and establish a connection
+try {
+    $database = new Database(); // Create a new Database instance
+    $pdo = $database->connect(); // Use the 'connect()' method to get the PDO connection
+
+    // Fetch member information (users whose user_id starts with 'M')
+    $sql = "SELECT user_id, username, email, phone_number FROM users WHERE user_id LIKE 'M%'";
+    $memberResult = $pdo->query($sql);
+} catch (PDOException $e) {
+    echo "Error fetching member information: " . $e->getMessage();
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +48,6 @@ if (!isset($_SESSION['user_id'])) {
   <h2>Staff</h2>
   <ul class="nav nav-pills nav-stacked">
     <li><a href="/html/profile.html">Profile</a></li>
-    <li><a href="#section1">Statistics</a></li>
     <li><a href="#section5">Membership List</a></li>
     <li><a href="#section2">Manage Member</a></li>
     <li><a href="#section3">Products Information</a></li>
@@ -42,33 +60,7 @@ if (!isset($_SESSION['user_id'])) {
 
 <!-- Main Content -->
 <div class="content">
-  <!-- Statistics Section -->
-  <div id="section1" class="well">
-    <h4>Statistics</h4>
-    <div class="row">
-      <!-- Total Users -->
-      <div class="col-md-4">
-        <div class="stat-box">
-          <h5>Total Users</h5>
-          <p class="stat-value">500</p>
-        </div>
-      </div>
-      <!-- Active Users -->
-      <div class="col-md-4">
-        <div class="stat-box">
-          <h5>Active Users</h5>
-          <p class="stat-value">350</p>
-        </div>
-      </div>
-      <!-- New Signups -->
-      <div class="col-md-4">
-        <div class="stat-box">
-          <h5>New Signups</h5>
-          <p class="stat-value">45</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 
   <!-- Membership List Section -->
   <div id="section5" class="well">
@@ -121,11 +113,42 @@ if (!isset($_SESSION['user_id'])) {
   </div>
 
   <!-- Manage Member Section -->
+  <!-- Manage Member Section -->
   <div id="section2" class="well">
-        <h4>Manage Member</h4>
-        <!-- Button to Manage Members -->
-        <a href="/php/manageMember.php" class="btn btn-info">Manage Member</a>
-    </div>
+   
+    <div class="container">
+  <h2>Member Information</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+      </tr>
+    </thead>
+    <tbody id="memberTableBody">
+  <?php
+  // Check if there are any members and display them
+  if ($memberResult && $memberResult->rowCount() > 0) {
+      while ($row = $memberResult->fetch(PDO::FETCH_ASSOC)) {
+          echo "<tr data-user-id='" . htmlspecialchars($row['user_id']) . "'>";
+          echo "<td>" . htmlspecialchars($row['user_id']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['username']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['phone_number']) . "</td>";
+          echo "</tr>";
+      }
+  } else {
+      echo "<tr><td colspan='5'>No members found.</td></tr>";
+  }
+  ?>
+</tbody>
+
+  </table>
+</div>
+    <a href="/php/manageMember.php" class="btn btn-info">Manage Member</a>
+  </div>
   
   <!-- Product Information Table -->
   <div id="section3" class="well">

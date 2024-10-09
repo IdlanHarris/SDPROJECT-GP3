@@ -7,6 +7,23 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: /");
     exit();
 }
+
+require __DIR__ . '/../../vendor/autoload.php'; // Autoload dependencies
+use App\Database;
+
+
+
+// Create a new instance of the Database class and establish a connection
+$database = new Database();
+$connection = $database->connect();
+// Fetch staff details from the database
+$staffQuery = "SELECT user_id, username, email, phone_number FROM users WHERE user_id LIKE 'S%'";
+$staffResult = $connection->query($staffQuery);
+
+// Fetch member details from the database
+$memberQuery = "SELECT user_id, username, email, phone_number FROM users WHERE user_id LIKE 'M%'";
+$memberResult = $connection->query($memberQuery);
+
 ?>
 
 <!DOCTYPE html>
@@ -31,48 +48,20 @@ if (!isset($_SESSION['user_id'])) {
   <h2>Admin</h2>
   <ul class="nav nav-pills nav-stacked">
     <li><a href="/html/profile.html">Profile</a></li>
-    <li><a href="#section1">Statistics</a></li>
-    <li><a href="#section5">Membership List</a></li>
+    <li><a href="#section1">Membership List</a></li>
     <li><a href="#section2">Manage Staff</a></li>
-    <li><a href="#section6">Manage Member</a></li>
-    <li><a href="#section3">Products Information</a></li>
-    <li><a href="#section4">Customer Orders</a></li>
+    <li><a href="#section3">Manage Member</a></li>
+    <li><a href="#section4">Products Information</a></li>
+    <li><a href="#section5">Customer Orders</a></li>
     <li><a href="/php/LogOut.php">Logout</a></li>
   </ul>
 </div>
 
 <!-- Main Content -->
 <div class="content">
-  <!-- Statistics Section -->
-  <div id="section1" class="well">
-    <h4>Statistics</h4>
-    <div class="row">
-      <!-- Total Users -->
-      <div class="col-md-4">
-        <div class="stat-box">
-          <h5>Total Users</h5>
-          <p class="stat-value">500</p>
-        </div>
-      </div>
-      <!-- Active Users -->
-      <div class="col-md-4">
-        <div class="stat-box">
-          <h5>Active Users</h5>
-          <p class="stat-value">350</p>
-        </div>
-      </div>
-      <!-- New Signups -->
-      <div class="col-md-4">
-        <div class="stat-box">
-          <h5>New Signups</h5>
-          <p class="stat-value">45</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Membership List Section -->
-  <div id="section5" class="well">
+
+<!-- Membership List Section -->
+<div id="section1" class="well">
     <h4>Membership List</h4>
     <!-- View Membership -->
     <table class="table table-bordered">
@@ -121,97 +110,85 @@ if (!isset($_SESSION['user_id'])) {
     </table>
   </div>
 
+ 
+
   <!-- Manage Staff Section -->
   <div id="section2" class="well">
-    <h4>Manage Staff</h4>
-    <!-- View Member -->
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Staff ID</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Phone Number</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>M1</td>
-          <td>s1</td>
-          <td>s1@gmail.com</td>
-          <td>123</td>
-        </tr>
-      </tbody>
-    </table>
-    <!-- Button to Add Staff -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addStaffModal">Add Staff</button>
-    <!-- Button to Remove Staff -->
-    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#removeStaffModal">Remove Staff</button>
-  </div>
-  
-  <!-- Add Staff Modal -->
-  <div id="addStaffModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add Staff</h4>
-            </div>
-            <div class="modal-body">
-                <form action="/php/AddRemoveStaff.php" method="POST">
-                    <div class="form-group">
-                        <label for="addStaffName">Username:</label>
-                        <input type="text" class="form-control" id="addStaffName" name="username" placeholder="Enter staff name">
-                    </div>
-                    <div class="form-group">
-                        <label for="addStaffEmail">Email:</label>
-                        <input type="email" class="form-control" id="addStaffEmail" name="email" placeholder="Enter staff email">
-                    </div>
-                    <div class="form-group">
-                        <label for="addStaffPhone">Phone Number:</label>
-                        <input type="text" class="form-control" id="addStaffPhone" name="phone_number" placeholder="Enter staff phone number">
-                    </div>
-                    <div class="form-group">
-                        <label for="addStaffPassword">Password:</label>
-                        <input type="password" class="form-control" id="addStaffPassword" name="password" placeholder="Enter staff password">
-                    </div>
-                    <button type="submit" class="btn btn-success">Add Staff</button>
-                </form>
-            </div>
-        </div>
-    </div>
+  <div class="container">
+  <h2>Staff Information</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Staff ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+      </tr>
+    </thead>
+    <tbody id="staffTableBody">
+  <?php
+  // Check if there are any staff members and display them
+  if ($staffResult && $staffResult->rowCount() > 0) {
+      while ($row = $staffResult->fetch(PDO::FETCH_ASSOC)) {
+          echo "<tr data-user-id='" . htmlspecialchars($row['user_id']) . "'>";
+          echo "<td>" . htmlspecialchars($row['user_id']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['username']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['phone_number']) . "</td>";
+          echo "</tr>";
+      }
+  } else {
+      echo "<tr><td colspan='5'>No staff members found.</td></tr>";
+  }
+  ?>
+</tbody>
+
+  </table>
 </div>
 
-  
-  <!-- Remove Staff Modal -->
-  <div id="removeStaffModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Remove Staff</h4>
-        </div>
-        <div class="modal-body">
-          <form action="/php/AddRemoveStaff.php" method="POST">
-            <div class="form-group">
-              <label for="removeStaffID">Staff ID:</label>
-              <input type="text" class="form-control" id="removeStaffID" name="user_id" placeholder="Enter staff ID">
-            </div>
-            <button type="submit" class="btn btn-danger">Remove Staff</button>
-          </form>
-        </div>
-      </div>
-    </div>
+    
+    <a href="/php/manageStaff.php" class="btn btn-info">Manage Staff</a>
   </div>
+
   <!-- Manage Member Section -->
-  <div id="section6" class="well">
-        <h4>Manage Member</h4>
-        <!-- Button to Manage Members -->
-        <a href="/php/manageMember.php" class="btn btn-info">Manage Member</a>
-    </div>
+  <div id="section3" class="well">
+   
+    <div class="container">
+  <h2>Member Information</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+      </tr>
+    </thead>
+    <tbody id="memberTableBody">
+  <?php
+  // Check if there are any members and display them
+  if ($memberResult && $memberResult->rowCount() > 0) {
+      while ($row = $memberResult->fetch(PDO::FETCH_ASSOC)) {
+          echo "<tr data-user-id='" . htmlspecialchars($row['user_id']) . "'>";
+          echo "<td>" . htmlspecialchars($row['user_id']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['username']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['phone_number']) . "</td>";
+          echo "</tr>";
+      }
+  } else {
+      echo "<tr><td colspan='5'>No members found.</td></tr>";
+  }
+  ?>
+</tbody>
+
+  </table>
+</div>
+    <a href="/php/manageMember.php" class="btn btn-info">Manage Member</a>
+  </div>
   
   <!-- Product Information Table -->
-  <div id="section3" class="well">
+  <div id="section4" class="well">
     <h4>Product Information</h4>
     <table class="table table-bordered">
       <thead>
@@ -240,7 +217,7 @@ if (!isset($_SESSION['user_id'])) {
   </div>
 
   <!-- Customer Orders Table -->
-  <div id="section4" class="well">
+  <div id="section5" class="well">
     <h4>Customer Orders</h4>
     <table class="table table-bordered">
       <thead>
