@@ -53,6 +53,7 @@ $memberResult = $connection->query($memberQuery);
     <li><a href="#section3">Manage Member</a></li>
     <li><a href="#section4">Products Information</a></li>
     <li><a href="#section5">Customer Orders</a></li>
+    <li><a href="reviewfeedback.html">Review Feedback</a></li>
     <li><a href="/php/LogOut.php">Logout</a></li>
   </ul>
 </div>
