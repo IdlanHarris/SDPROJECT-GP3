@@ -155,19 +155,25 @@ $(document).ready(function() {
     const row = $(this).closest('tr');
     const staffId = row.data('user-id');
 
-    $.post('', { remove_id: staffId })
-    .done(function(response) {
-      const data = JSON.parse(response);
-      if (data.success) {
-        row.remove(); // Remove the staff member row
-      } else {
-        alert('Error: ' + data.message); // Display error message
-      }
-    })
-    .fail(function(xhr, status, error) {
-      console.error('Error:', status, error);
-      alert('Error occurred: ' + xhr.responseText);
-    });
+    // Display confirmation dialog
+    const confirmation = confirm("Are you sure you want to remove this staff member?");
+
+    if (confirmation) {
+      $.post('', { remove_id: staffId })
+      .done(function(response) {
+        const data = JSON.parse(response);
+        if (data.success) {
+          row.remove(); // Remove the staff member row if deletion is successful
+        } else {
+          alert('Error: ' + data.message); // Display error message
+        }
+      })
+      .fail(function(xhr, status, error) {
+        console.error('Error:', status, error);
+        alert('Error occurred: ' + xhr.responseText);
+      });
+    }
+    // If the user cancels, do nothing and just return.
   });
 
   // Handle the editing of a staff member
