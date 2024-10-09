@@ -1,0 +1,61 @@
+<?php
+session_start(); // Start the session
+
+// Check if the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // If not logged in, redirect to the login page
+    header("Location: /");
+    exit();
+}
+
+require _DIR_ . '/../../vendor/autoload.php'; // Autoload dependencies
+use App\Database;
+
+// Create a new instance of the Database class and establish a connection
+$database = new Database();
+$connection = $database->connect();
+
+// Fetch feedback ratings and messages
+$query = "SELECT r.rating, fm.message FROM rating r JOIN feedback_messages fm ON r.id = fm.rating_id";
+$result = $connection->query($query);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>User Feedback</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>User Feedback</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Rating</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Check if there are any feedback entries and display them
+            if ($result && $result->rowCount() > 0) {
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row['rating']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['message']) . "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='2'>No feedback available.</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
