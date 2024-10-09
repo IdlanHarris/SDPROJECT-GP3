@@ -114,7 +114,7 @@ $memberResult = $connection->query($memberQuery);
 
   <!-- Manage Staff Section -->
   <div id="section2" class="well">
-  <div class="container">
+  <div class="">
   <h2>Staff Information</h2>
   <table class="table table-bordered">
     <thead>
@@ -155,7 +155,7 @@ $memberResult = $connection->query($memberQuery);
   <!-- Manage Member Section -->
   <div id="section3" class="well">
    
-    <div class="container">
+    <div class="">
   <h2>Member Information</h2>
   <table class="table table-bordered">
     <thead>
