@@ -101,7 +101,7 @@ if (!isset($_SESSION['user_id'])) {
                     <h2 class="fw-bolder">Calorie Calculator</h2>
                     <p class="lead mb-3">Calculate your daily calorie needs to stay on track with your fitness goals.</p>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#calorieModal">Open Calorie Calculator</button>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#calorieModal">OPEN</button>
                     </div>
                 </div>
             </div>
@@ -117,11 +117,12 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                     <div class="modal-body">
                         <!-- Embed your calorie calculator here or link to a separate file -->
-                        <iframe src="\under review\html\calorieCalculator.html" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe src="/html/CalCalc.html" width="100%" height="480" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
         </div>
+
         
         <!-- Gym Schedule Section -->
         <section id="gym-schedule" class="content-section text-center border-bottom">
