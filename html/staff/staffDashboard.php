@@ -52,6 +52,7 @@ try {
     <li><a href="#section2">Manage Member</a></li>
     <li><a href="#section3">Products Information</a></li>
     <li><a href="#section4">Customer Orders</a></li>
+    <li><a href="/html/reviewfeedback.php">Review Feedback</a></li>
     <li><a href="/php/LogOut.php">Logout</a></li>
   </ul>
 </div>
