@@ -5,9 +5,9 @@
 --> Website for BRONCO GYM at UTMKL
 
 ## Requirements
-[Apache Server - Laragon (recommended)](https://laragon.org/)
-[Composer](https://getcomposer.org/Composer-Setup.exe)
-[PDO Pgsql enabled](https://www.php.net/manual/en/ref.pdo-pgsql.php)
+- [Apache Server - Laragon (recommended)](https://laragon.org/)
+- [Composer](https://getcomposer.org/Composer-Setup.exe)
+- [PDO Pgsql enabled](https://www.php.net/manual/en/ref.pdo-pgsql.php)
 
 ## Installation
 
@@ -43,7 +43,6 @@
         ```
 
     **Important:**  Do not commit the `.env` file to your version control system (e.g., Git) for security reasons.
-
 
 5. **Enable PDO Pgsql (IMPORTANT):**
     - Go to your php.ini file and uncomment this line `extension=pdo_pgsql`.

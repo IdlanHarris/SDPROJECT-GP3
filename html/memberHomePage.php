@@ -349,6 +349,7 @@ if (!isset($_SESSION['user_id'])) {
                             </div>
                         </div>
                     </div>
+        
                 </div>
         
                 <!-- Navigation Buttons -->
@@ -359,7 +360,6 @@ if (!isset($_SESSION['user_id'])) {
         
             </div>
         </section>
-        <!-- Product Showcase section End-->
 
 <!-- Workout List Section -->
 <section id="workout-list" class="py-5 bg-light border-bottom">

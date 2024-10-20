@@ -33,10 +33,6 @@
             <label class="form-label"><strong>Phone Number:</strong></label>
             <p id="view-phoneNumber">Loading...</p>
         </div>
-        <div class="mb-3">
-            <label class="form-label"><strong>Membership:</strong></label>
-            <p id="view-membership">Loading...</p> <!-- Added membership field -->
-        </div>
         <a href="editProfile.html"><button class="btn btn-secondary btn-custom">Edit Profile</button></a>
         <a href="/html/changePass.html"><button class="btn btn-primary btn-custom mt-3">Change Password</button></a>
         <button class="btn btn-primary btn-custom mt-3" id="home-button">Home</button>
@@ -55,13 +51,11 @@
                         $('#view-username').text('N/A');
                         $('#view-email').text('N/A');
                         $('#view-phoneNumber').text('N/A');
-                        $('#view-membership').text('N/A');  // Error handling for membership
                         $('#view-image').attr('src', '../assets/Default pfp.png');
                     } else {
                         $('#view-username').text(data.username);
                         $('#view-email').text(data.email);
                         $('#view-phoneNumber').text(data.phone_number);
-                        $('#view-membership').text(data.membership || 'No Membership'); // Display membership or default
                         $('#view-image').attr('src', data.profile_image ? '../' + data.profile_image : '../assets/Default pfp.png');
 
                         // Set user_id in the home button for redirection
@@ -72,7 +66,6 @@
                     $('#view-username').text('Error loading data');
                     $('#view-email').text('Error loading data');
                     $('#view-phoneNumber').text('Error loading data');
-                    $('#view-membership').text('Error loading data'); // Error handling for membership
                     $('#view-image').attr('src', '../assets/Default pfp.png');
                 }
             });
