@@ -4,7 +4,7 @@ session_start(); // Start session to store user information
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require __DIR__ . '/../vendor/autoload.php'; // Autoload dependencies
+require __DIR__ . '/../SDPROJECT-GP3/vendor/autoload.php'; // Autoload dependencies
 use App\Database;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -28,7 +28,7 @@ try {
     $phoneNumber = trim($_POST['phoneNumber']);
 
     // Step 4: Hash the password for security
-    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    //$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
     // Step 5: Insert the new user into the database with the custom user_id
     $stmt = $connection->prepare("INSERT INTO users (user_id, username, email, password, phone_number, user_type) VALUES (?, ?, ?, ?, ?, ?)");
@@ -51,7 +51,7 @@ try {
     sendVerificationEmail($email, $verificationToken);
 
     echo "Please verify your email to activate your account.";
-    header("Location: /php/verificationPage.php"); // Redirect to verification page
+    header("Location: verificationPage.php"); // Redirect to verification page
     exit();
 } catch (PDOException $e) {
     // Display an error message if something goes wrong
