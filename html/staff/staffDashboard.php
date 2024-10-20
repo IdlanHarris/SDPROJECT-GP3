@@ -109,8 +109,6 @@ $memberResult = $connection->query($memberQuery);
     </table>
   </div>
 
-  <!-- Manage Member Section -->
-<<<<<<< HEAD
     <!-- Manage Member Section -->
     <div id="section3" class="well">
     
@@ -142,38 +140,36 @@ $memberResult = $connection->query($memberQuery);
   }
   ?>
 
-=======
-   <!-- Manage Member Section -->
-   <div id="section3" class="well">
-   
-   <div class="">
- <h2>Member Information</h2>
- <table class="table table-bordered">
-   <thead>
-     <tr>
-       <th>User ID</th>
-       <th>Username</th>
-       <th>Email</th>
-       <th>Phone Number</th>
-     </tr>
-   </thead>
-   <tbody id="memberTableBody">
- <?php
- // Check if there are any members and display them
- if ($memberResult && $memberResult->rowCount() > 0) {
-     while ($row = $memberResult->fetch(PDO::FETCH_ASSOC)) {
-         echo "<tr data-user-id='" . htmlspecialchars($row['user_id']) . "'>";
-         echo "<td>" . htmlspecialchars($row['user_id']) . "</td>";
-         echo "<td>" . htmlspecialchars($row['username']) . "</td>";
-         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-         echo "<td>" . htmlspecialchars($row['phone_number']) . "</td>";
-         echo "</tr>";
-     }
- } else {
-     echo "<tr><td colspan='5'>No members found.</td></tr>";
- }
- ?>
->>>>>>> 8cc698136a2786158993f349ae78a8c6effd7935
+    <!-- Manage Member Section -->
+    <div id="section3" class="well">
+    
+    <div class="">
+  <h2>Member Information</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+      </tr>
+    </thead>
+    <tbody id="memberTableBody">
+  <?php
+  // Check if there are any members and display them
+  if ($memberResult && $memberResult->rowCount() > 0) {
+      while ($row = $memberResult->fetch(PDO::FETCH_ASSOC)) {
+          echo "<tr data-user-id='" . htmlspecialchars($row['user_id']) . "'>";
+          echo "<td>" . htmlspecialchars($row['user_id']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['username']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+          echo "<td>" . htmlspecialchars($row['phone_number']) . "</td>";
+          echo "</tr>";
+      }
+  } else {
+      echo "<tr><td colspan='5'>No members found.</td></tr>";
+  }
+  ?>
 </tbody>
 
   </table>
