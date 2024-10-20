@@ -113,11 +113,10 @@ try {
     </table>
   </div>
 
-  <!-- Manage Member Section -->
+
   <!-- Manage Member Section -->
   <div id="section2" class="well">
-   
-    <div class="container">
+  <div class="">
   <h2>Member Information</h2>
   <table class="table table-bordered">
     <thead>
