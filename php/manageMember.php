@@ -131,7 +131,7 @@ $result = $connection->query($query);
               echo "<td class='username'>" . htmlspecialchars($row['username']) . "</td>";
               echo "<td class='email'>" . htmlspecialchars($row['email']) . "</td>";
               echo "<td class='phone-number'>" . htmlspecialchars($row['phone_number']) . "</td>";
-              echo "<td><button class='btn btn-danger remove-btn'>Remove</button> <button class='btn btn-primary edit-btn'>Edit</button></td>";
+              echo "<td><button class='btn btn-danger remove-btn'>Delete</button> <button class='btn btn-primary edit-btn'>Edit</button></td>";
               echo "</tr>";
           }
       } else {
