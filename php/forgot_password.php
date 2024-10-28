@@ -59,7 +59,7 @@ function sendResetEmail($email, $resetToken) {
         $mail->setFrom('broncogymutmkl@gmail.com', 'Bronco Gym Fitness');
         $mail->addAddress($email);
 
-        $resetLink = "http://sdproject-gp3.test/php/reset_password.php?token=$resetToken";
+        $resetLink = "http://sdproject-gp3.test/html/reset_Password.html?token=$resetToken";
         $mail->isHTML(true);
         $mail->Subject = 'Password Reset Request';
         $mail->Body = "Click <a href='$resetLink'>here</a> to reset your password.";

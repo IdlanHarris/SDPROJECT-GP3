@@ -14,15 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    //$passwordHash = password_hash($newPassword, PASSWORD_DEFAULT);
-
     // Validate token
     $stmt = $connection->prepare("SELECT user_id FROM users WHERE reset_token = ? AND reset_token_expiry > NOW()");
     $stmt->execute([$token]);
     $user = $stmt->fetch();
 
     if ($user) {
-        // Update password and clear reset token
+        // Update password without hashing
         $stmt = $connection->prepare("UPDATE users SET password = ?, reset_token = NULL, reset_token_expiry = NULL WHERE user_id = ?");
         $stmt->execute([$newPassword, $user['user_id']]);
 
