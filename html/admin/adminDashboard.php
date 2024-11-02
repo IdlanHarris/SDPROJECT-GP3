@@ -442,7 +442,9 @@ $(document).ready(function () {
                     alert(response.message); // Show error message
                 }
             },
-          
+            error: function () {
+                alert('An error occurred. Please try again.');
+            }
         });
     });
 
