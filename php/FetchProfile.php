@@ -21,7 +21,7 @@ $connection = $database->connect();
 
 try {
     // Prepare and execute the query to fetch user profile data
-    $stmt = $connection->prepare("SELECT username, email, phone_number, profile_image FROM users WHERE user_id = ?");
+    $stmt = $connection->prepare("SELECT username, email, phone_number, membership, profile_image FROM users WHERE user_id = ?");
     $stmt->execute([$_SESSION['user_id']]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
