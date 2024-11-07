@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Step 7: Redirect to profile page if successful
-        header("Location: /html/profile.html"); // Adjust the path if necessary
+        header("Location: /html/profile.php"); // Adjust the path if necessary
         exit;
 
     } catch (Exception $e) {

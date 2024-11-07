@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../vendor/autoload.php'; // Autoload dependencies
+require __DIR__ . '/../SDPROJECT-GP3-new-/vendor/autoload.php'; // Autoload dependencies
 use App\Database;
 
 session_start(); // Ensure session is started
@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $newPass = trim($_POST['newPass']);
         $confirmPass = trim($_POST['confPass']);
         $username = $_SESSION['username'] ?? ''; // Fetch the username from the session
+        $hashed_password = password_hash( $hashed_password, PASSWORD_DEFAULT);
 
         // Step 2: Validate input
         if (empty($currentPass) || empty($newPass) || empty($confirmPass)) {
@@ -49,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Step 5: Verify the current password
         if ($currentPass === $user['password']) {
             // Step 6: Update the user's password in the database (plain text)
-            $updateStmt = $connection->prepare("UPDATE users SET password = ? WHERE username = ?");
-            $isUpdated = $updateStmt->execute([$newPass, $username]);
+            $updateStmt = $connection->prepare("UPDATE users SET password = ?, hash_password = ? WHERE username = ?");
+            $isUpdated = $updateStmt->execute([$newPass, $hashed_password,$username]);
 
             if ($isUpdated) {
                 echo "Password changed successfully.";
@@ -58,13 +59,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Step 7: Redirect based on user_type
                 switch ($user['user_type']) {
                     case 'admin':
-                        header("Location: /html/admin/adminDashboard.php");
+                        header("Location: adminDashboard.php");
                         break;
                     case 'staff':
-                        header("Location: /html/staff/staffDashboard.php");
+                        header("Location: staffDashboard.php");
                         break;
                     case 'member':
-                        header("Location: /html/memberHomePage.php");
+                        header("Location: memberHomePage.php");
                         break;
                     default:
                         echo "Invalid user type.";

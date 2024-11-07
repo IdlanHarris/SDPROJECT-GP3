@@ -47,7 +47,7 @@ $memberResult = $connection->query($memberQuery);
 <div class="sidebar" id="mySidebar">
   <h2>Admin</h2>
   <ul class="nav nav-pills nav-stacked">
-    <li><a href="/html/profile.html">Profile</a></li>
+    <li><a href="/html/profile.php">Profile</a></li>
     <li><a href="#section1">Membership List</a></li>
     <li><a href="#section2">Manage Staff</a></li>
     <li><a href="#section3">Manage Member</a></li>

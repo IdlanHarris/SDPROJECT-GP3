@@ -45,7 +45,7 @@ if (!isset($_SESSION['user_id'])) {
                             Home
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="profile.php">Profile</a></li>
                             <li><a class="dropdown-item" href="#calorie-calculator">Calculator</a></li>
                             <li><a class="dropdown-item" href="#gym-schedule">Schedule</a></li>
                             <li><a class="dropdown-item" href="#location">Location</a></li>
