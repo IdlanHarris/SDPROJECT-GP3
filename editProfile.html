@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="./css/profile.css" rel="stylesheet">
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <h1>Edit Profile</h1>
+            <hr>
+        </div>
+
+        <!-- Use POST and point the form to editprofile.php -->
+        <form id="profileForm" method="POST" action="EditProfile.php" enctype="multipart/form-data">
+            <div class="text-center">
+                <img id="editable-image" src="../img/Default pfp.png" alt="Editable Image" width="150px" class="profile-image"><br>
+                <input type="file" id="upload-image" name="profile_image" accept="image/*" class="form-control mb-4">
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label"><strong>Username:</strong></label>
+                <input type="text" id="username" name="username" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label"><strong>Email:</strong></label>
+                <input type="email" id="email" name="email" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="PhoneNumber" class="form-label"><strong>Phone Number:</strong></label>
+                <input type="number" id="PhoneNumber" name="phone_number" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary btn-custom">Save</button>
+        </form>
+        <a href="profile.php"><button type="submit" class="btn btn-primary btn-custom mt-3">Back</button></a>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery (necessary for AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        // Fetch profile data from server-side script
+        $(document).ready(function() {
+            $.ajax({
+                url: 'FetchProfile.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    if (data.error) {
+                        $('#username').val('N/A');
+                        $('#email').val('N/A');
+                        $('#PhoneNumber').val('N/A');
+                        $('#editable-image').attr('src', '../assets/Default pfp.png');
+                    } else {
+                        $('#username').val(data.username);
+                        $('#email').val(data.email);
+                        $('#PhoneNumber').val(data.phone_number);
+                        $('#editable-image').attr('src', data.profile_image ? '../' + data.profile_image : '../assets/Default pfp.png');
+                    }
+                },
+                error: function() {
+                    $('#username').val('Error loading data');
+                    $('#email').val('Error loading data');
+                    $('#PhoneNumber').val('Error loading data');
+                    $('#editable-image').attr('src', '../assets/Default pfp.png');
+                }
+            });
+        });
+
+        // JavaScript to handle image change (client-side preview)
+        const imgElement = document.getElementById('editable-image');
+        const fileInput = document.getElementById('upload-image');
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imgElement.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            } else {
+                alert("Please upload a valid image file.");
+            }
+        });
+    </script>
+</body>
+</html>

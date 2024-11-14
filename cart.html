@@ -1,0 +1,46 @@
+<!-- cart.html -->
+<div id="cart-container">
+    <h2>Your Cart</h2>
+    <ul id="cart-items"></ul>
+</div>
+
+<script>
+    // Load cart items from localStorage
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Function to display cart items
+    function displayCart() {
+        const cartList = document.getElementById('cart-items');
+        cartList.innerHTML = ''; // Clear existing items
+
+        cartItems.forEach((item, index) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${item.name} - Quantity: ${item.quantity}`;
+            
+            // Create remove button
+            const removeButton = document.createElement('button');
+            removeButton.textContent = "Remove";
+            removeButton.className = "remove-btn";
+            removeButton.onclick = () => removeItem(index); // Attach remove function
+            
+            // Append remove button to list item
+            listItem.appendChild(removeButton);
+            cartList.appendChild(listItem);
+        });
+    }
+
+    // Function to remove item from cart
+    function removeItem(index) {
+        cartItems.splice(index, 1); // Remove item at the specified index
+        localStorage.setItem('cart', JSON.stringify(cartItems)); // Update localStorage
+        displayCart(); // Refresh the cart display
+    }
+
+    // Function to navigate back to the product page
+    function goBack() {
+        window.location.href = 'productPage.html'; // Replace with the actual product page URL
+    }
+
+    // Initial display of cart items
+    displayCart();
+</script>
