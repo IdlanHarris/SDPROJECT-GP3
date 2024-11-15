@@ -1,9 +1,3 @@
-<-----BRONCO GYM FITNESS SYSTEM----->
-
---> Final Year Project
-
---> Website for BRONCO GYM at UTMKL
-
 ## Requirements
 - [Apache Server - Laragon (recommended)](https://laragon.org/)
 - [Composer](https://getcomposer.org/Composer-Setup.exe)
